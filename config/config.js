@@ -17,7 +17,7 @@ const chatConfig = {
   header: {
     title: "Chaitanya",
     description:
-      "Greetings, I am a draft clone of ELIZA running the DOCTOR script. HOW DO YOU DO. PLEASE STATE YOUR PROBLEM.",
+      "Greetings, I am a draft clone of Chai he must be busy thinking about something how can i help you?.",
   },
   suggestedPromptsTitle: "Here are some suggested prompts.",
   suggestedPrompts: [

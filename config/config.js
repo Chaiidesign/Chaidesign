@@ -13,7 +13,7 @@
 
 const chatConfig = {
   flowURL:
-    "https://api.zerowidth.ai/v1/process/UvxlzCFXzR3aAgvsD8Nf/QDcqFRhjjrjZUTHsvxWX",
+    "https://api.zerowidth.ai/beta/process/4qE2oEOScJgkv6JZ8FYz/3T5oWea6DieHvUUv8fpQ",
   header: {
     title: "Chaitanya",
     description:

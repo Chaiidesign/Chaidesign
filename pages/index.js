@@ -319,101 +319,68 @@ export default function AgentComponent() {
       <div
         style={{
           display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: "5px",
-          maxWidth: "754px",
           width: "100%",
+          maxWidth: "711px",
+          alignItems: "center",
+          gap: "70px",
           margin: "0 auto 20px auto",
+          justifyContent: "center",
+          flexWrap: "wrap",
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            width: "754px",
-            flexDirection: "column",
-            justifyContent: "flex-end",
-            alignItems: "center",
-            gap: "17px",
-            maxWidth: "100%",
-          }}
-        >
+        {suggestions.map((s, idx) => (
           <div
+            key={s.title}
+            onMouseOver={() => setInputPlaceholder(s.message)}
+            onMouseOut={() => setInputPlaceholder(defaultPlaceholder)}
+            onClick={() => setMessage(s.message)}
             style={{
               display: "flex",
-              width: "710.912px",
+              width: "59.559px",
               flexDirection: "column",
-              alignItems: "flex-start",
-              gap: "12px",
-              maxWidth: "100%",
+              alignItems: "center",
+              gap: "7px",
+              cursor: "pointer",
             }}
           >
             <div
+              className="suggestion-circle"
               style={{
+                width: "59.559px",
+                height: "59.559px",
+                flexShrink: 0,
+                borderRadius: "46px",
+                border: "1px solid #000",
+                background: "rgba(128, 128, 128, 0.30)",
+                backgroundBlendMode: "luminosity",
+                backdropFilter: "blur(50px)",
                 display: "flex",
                 alignItems: "center",
-                gap: "70px",
-                alignSelf: "stretch",
                 justifyContent: "center",
-                width: "100%",
+                transition: "background 0.2s, border 0.2s",
+              }}
+              onMouseOver={e => e.currentTarget.style.background = 'rgba(128,128,128,0.5)'}
+              onMouseOut={e => e.currentTarget.style.background = 'rgba(128,128,128,0.30)'}
+            >
+              {/* Placeholder for icon */}
+              <div style={{ width: 32, height: 32, borderRadius: "50%", background: "#d3d3d3" }} />
+            </div>
+            <div
+              style={{
+                alignSelf: "stretch",
+                color: "#000",
+                textAlign: "center",
+                fontFamily: 'Acumin Pro, Arial, sans-serif',
+                fontSize: "14px",
+                fontStyle: "normal",
+                fontWeight: 400,
+                lineHeight: "normal",
               }}
             >
-              {suggestions.map((s, idx) => (
-                <div
-                  key={s.title}
-                  onMouseOver={() => setInputPlaceholder(s.message)}
-                  onMouseOut={() => setInputPlaceholder(defaultPlaceholder)}
-                  onClick={() => setMessage(s.message)}
-                  style={{
-                    display: "flex",
-                    width: "59.559px",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    gap: "7px",
-                    cursor: "pointer",
-                  }}
-                >
-                  <div
-                    className="suggestion-circle"
-                    style={{
-                      width: "59.559px",
-                      height: "59.559px",
-                      flexShrink: 0,
-                      borderRadius: "46px",
-                      border: "1px solid rgba(255, 255, 255, 0.40)",
-                      background: "rgba(128, 128, 128, 0.30)",
-                      backgroundBlendMode: "luminosity",
-                      backdropFilter: "blur(50px)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      transition: "background 0.2s, border 0.2s",
-                    }}
-                    onMouseOver={e => e.currentTarget.style.background = 'rgba(128,128,128,0.5)'}
-                    onMouseOut={e => e.currentTarget.style.background = 'rgba(128,128,128,0.30)'}
-                  >
-                    {/* Placeholder for icon */}
-                    <div style={{ width: 32, height: 32, borderRadius: "50%", background: "#d3d3d3" }} />
-                  </div>
-                  <div
-                    style={{
-                      alignSelf: "stretch",
-                      color: "#000",
-                      textAlign: "center",
-                      fontFamily: 'Acumin Pro, Arial, sans-serif',
-                      fontSize: "14px",
-                      fontStyle: "normal",
-                      fontWeight: 400,
-                      lineHeight: "normal",
-                    }}
-                  >
-                    {s.title}
-                  </div>
-                </div>
-              ))}
+              {s.title}
             </div>
           </div>
-        </div>
+        ))}
       </div>
       {/* Descriptive header for the chat application */}
       <div
@@ -485,40 +452,72 @@ export default function AgentComponent() {
       </div>
 
       {/* Suggested Prompts Section */}
+      {/* Suggestion Pills Section (replaces old prompts) */}
       <div
         style={{
           display: "flex",
+          width: "100%",
+          maxWidth: "711px",
+          alignItems: "center",
+          gap: "70px",
+          margin: "0 auto 20px auto",
+          justifyContent: "center",
           flexWrap: "wrap",
-          border: "1px solid #ccc",
-          marginBottom: "0px",
         }}
       >
-        <div style={{ margin: "2px", fontSize: "10px", fontStyle: "italic" }}>
-          {chatConfig.suggestedPromptsTitle}
-        </div>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "2px" }}>
-          {chatConfig.suggestedPrompts.map((prompt, index) => (
-            <button
-              key={index}
-              onClick={() => handlePromptClick(prompt)}
-              onMouseOver={() => handlePromptMouseOver(index)}
-              onMouseOut={handlePromptMouseOut}
-              disabled={isLoading}
+        {suggestions.map((s, idx) => (
+          <div
+            key={s.title}
+            onMouseOver={() => setInputPlaceholder(s.message)}
+            onMouseOut={() => setInputPlaceholder(defaultPlaceholder)}
+            onClick={() => setMessage(s.message)}
+            style={{
+              display: "flex",
+              width: "59.559px",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "7px",
+              cursor: "pointer",
+            }}
+          >
+            <div
+              className="suggestion-circle"
               style={{
-                padding: "2px 4px",
-                borderRadius: "5px",
-                border: "1px solid #ccc",
-                margin: "2px",
-                backgroundColor: hoveredIndex === index ? "#ddd" : "#f4f4f4",
-                color: hoveredIndex === index ? "#000" : "#888",
-                fontSize: "12px",
-                cursor: "pointer",
+                width: "59.559px",
+                height: "59.559px",
+                flexShrink: 0,
+                borderRadius: "46px",
+                border: "1px solid #000",
+                background: "rgba(128, 128, 128, 0.30)",
+                backgroundBlendMode: "luminosity",
+                backdropFilter: "blur(50px)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                transition: "background 0.2s, border 0.2s",
+              }}
+              onMouseOver={e => e.currentTarget.style.background = 'rgba(128,128,128,0.5)'}
+              onMouseOut={e => e.currentTarget.style.background = 'rgba(128,128,128,0.30)'}
+            >
+              {/* Placeholder for icon */}
+              <div style={{ width: 32, height: 32, borderRadius: "50%", background: "#d3d3d3" }} />
+            </div>
+            <div
+              style={{
+                alignSelf: "stretch",
+                color: "#000",
+                textAlign: "center",
+                fontFamily: 'Acumin Pro, Arial, sans-serif',
+                fontSize: "14px",
+                fontStyle: "normal",
+                fontWeight: 400,
+                lineHeight: "normal",
               }}
             >
-              {prompt}
-            </button>
-          ))}
-        </div>
+              {s.title}
+            </div>
+          </div>
+        ))}
       </div>
 
       {/* Chat input form for the user to send messages */}

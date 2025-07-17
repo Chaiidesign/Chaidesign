@@ -544,16 +544,65 @@ export default function AgentComponent() {
         </div>
       </form>
 
-      {/* Tiny display of user ID and session ID */}
+      {/* Info stack below chat */}
       <div
         style={{
-          marginTop: "2px",
-          fontSize: "9px",
-          color: "#999",
-          textAlign: "center",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "9px",
+          marginTop: "8px",
         }}
       >
-        User ID: {userId} | Session ID: {sessionId}
+        {/* BETA badge */}
+        <div
+          style={{
+            display: "flex",
+            width: "33px",
+            height: "14.143px",
+            padding: "3.367px",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "6.735px",
+            borderRadius: "14.143px",
+            background: "#D9D9D9",
+          }}
+        >
+          <span
+            style={{
+              width: "27px",
+              height: "9px",
+              flexShrink: 0,
+              color: "#424242",
+              textAlign: "center",
+              fontFamily: 'Acumin Pro',
+              fontSize: "8.082px",
+              fontStyle: "normal",
+              fontWeight: 700,
+              lineHeight: "normal",
+              letterSpacing: 0,
+            }}
+          >
+            BETA
+          </span>
+        </div>
+        {/* Text holder */}
+        <div
+          style={{
+            width: "186px",
+            height: "11px",
+            color: "#424242",
+            fontFamily: 'Acumin Pro',
+            fontSize: "11px",
+            fontStyle: "normal",
+            fontWeight: 400,
+            lineHeight: "normal",
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          Chai.AI may create unexpected results
+        </div>
       </div>
 
       {/* Display error message if one occurs */}

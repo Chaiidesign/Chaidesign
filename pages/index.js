@@ -315,40 +315,6 @@ export default function AgentComponent() {
         border: "1px solid #ccc",
       }}
     >
-      {/* Descriptive header for the chat application */}
-      <div
-        className="chat-header"
-        style={{
-          marginBottom: "0px",
-          userSelect: "none",
-        }}
-      >
-        <div
-          className="chat-title"
-          style={{
-            backgroundColor: "#000",
-            color: "#fff",
-            padding: "10px",
-            borderRadius: "5px",
-            fontSize: "16px",
-            fontWeight: "bold",
-          }}
-        >
-          {chatConfig.header.title}
-        </div>
-        <div
-          className="chat-description"
-          style={{
-            padding: "10px",
-            borderRadius: "5px",
-            fontSize: "12px",
-            fontWeight: "normal",
-          }}
-        >
-          {chatConfig.header.description}
-        </div>
-      </div>
-
       {/* Chat conversation container displaying messages in bubbles */}
       <div
         className="chat-container"

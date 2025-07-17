@@ -229,14 +229,8 @@ export default function AgentComponent() {
     } catch (err) {
       // Log the error to the console for debugging.
       console.error("Error fetching agent response:", err);
-      // Show error as a chat reply from the agent
-      setConversation((prev) => [
-        ...prev,
-        {
-          role: "agent",
-          content: `Error: ${err.message}`,
-        },
-      ]);
+      // Update the error state so that the user is informed.
+      setError(err.message);
     } finally {
       // Reset the loading state regardless of success or error.
       setIsLoading(false);
@@ -312,18 +306,13 @@ export default function AgentComponent() {
   return (
     <div
       style={{
-        padding: 0,
-        width: "100%",
-        maxWidth: "710.91px",
-        margin: "40px auto 0 auto",
+        padding: "5px",
+        width: "100vw",
+        maxWidth: "600px",
+        margin: "0 auto",
         fontFamily: "Arial, sans-serif",
-        borderRadius: 0,
-        boxShadow: "none",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        background: "none",
-        border: "none",
+        borderRadius: "5px",
+        border: "1px solid #ccc",
       }}
     >
       {/* Chat conversation container displaying messages in bubbles */}
@@ -336,10 +325,10 @@ export default function AgentComponent() {
           marginBottom: "0px",
           height: chatConfig.maxChatHeight, // Set a fixed height for the chat container
           overflowY: "auto", // Enable vertical scrolling
-          border: "none",
-          padding: 0,
-          borderRadius: 0,
-          background: "none",
+          border: "2px solid #000", // Optional: border around the chat area
+          padding: "0px",
+          borderRadius: "5px 5px 0 0",
+          backgroundColor: "#eee",
           width: "100%",
         }}
       >
@@ -366,86 +355,70 @@ export default function AgentComponent() {
       <div
         style={{
           display: "flex",
-          width: "754px",
-          height: "215.702px",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: "5px",
-          flexShrink: 0,
+          width: "100%",
+          maxWidth: "710.91px",
           margin: "0 auto 24px auto",
-          maxWidth: "100%",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: "min(5vw, 32px)", // Responsive gap, adjust as needed
+          flexWrap: "wrap",
         }}
       >
-        {/* Suggestion Pills Row */}
-        <div
-          style={{
-            display: "flex",
-            width: "100%",
-            maxWidth: "710.91px",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: "min(5vw, 32px)",
-            flexWrap: "wrap",
-          }}
-        >
-          {suggestions.map((s, idx) => (
+        {suggestions.map((s, idx) => (
+          <div
+            key={s.title}
+            onMouseOver={() => setInputPlaceholder(s.message)}
+            onMouseOut={() => setInputPlaceholder(defaultPlaceholder)}
+            onClick={() => setMessage(s.message)}
+            style={{
+              display: "flex",
+              width: "59.559px",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "7px",
+              cursor: "pointer",
+              minWidth: "59.559px",
+              boxSizing: "border-box",
+            }}
+          >
             <div
-              key={s.title}
-              onMouseOver={() => setInputPlaceholder(s.message)}
-              onMouseOut={() => setInputPlaceholder(defaultPlaceholder)}
-              onClick={() => setMessage(s.message)}
+              className="suggestion-circle"
               style={{
-                display: "flex",
                 width: "59.559px",
-                flexDirection: "column",
+                height: "59.559px",
+                flexShrink: 0,
+                borderRadius: "46px",
+                border: "1px solid #000",
+                background: "rgba(128, 128, 128, 0.30)",
+                backgroundBlendMode: "luminosity",
+                backdropFilter: "blur(50px)",
+                display: "flex",
                 alignItems: "center",
-                gap: "7px",
-                cursor: "pointer",
-                minWidth: "59.559px",
-                boxSizing: "border-box",
+                justifyContent: "center",
+                transition: "background 0.2s, border 0.2s",
+              }}
+              onMouseOver={e => e.currentTarget.style.background = 'rgba(128,128,128,0.5)'}
+              onMouseOut={e => e.currentTarget.style.background = 'rgba(128,128,128,0.30)'}
+            >
+              {/* Placeholder for icon */}
+              <div style={{ width: 32, height: 32, borderRadius: "50%", background: "#d3d3d3" }} />
+            </div>
+            <div
+              style={{
+                alignSelf: "stretch",
+                color: "#000",
+                textAlign: "center",
+                fontFamily: 'Acumin Pro, Arial, sans-serif',
+                fontSize: "14px",
+                fontStyle: "normal",
+                fontWeight: 400,
+                lineHeight: "normal",
               }}
             >
-              <div
-                className="suggestion-circle"
-                style={{
-                  width: "59.559px",
-                  height: "59.559px",
-                  flexShrink: 0,
-                  borderRadius: "46px",
-                  border: "1px solid #000",
-                  background: "rgba(128, 128, 128, 0.30)",
-                  backgroundBlendMode: "luminosity",
-                  backdropFilter: "blur(50px)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  transition: "background 0.2s, border 0.2s",
-                }}
-                onMouseOver={e => e.currentTarget.style.background = 'rgba(128,128,128,0.5)'}
-                onMouseOut={e => e.currentTarget.style.background = 'rgba(128,128,128,0.30)'}
-              >
-                {/* Placeholder for icon */}
-                <div style={{ width: 32, height: 32, borderRadius: "50%", background: "#d3d3d3" }} />
-              </div>
-              <div
-                style={{
-                  alignSelf: "stretch",
-                  color: "#000",
-                  textAlign: "center",
-                  fontFamily: 'Acumin Pro, Arial, sans-serif',
-                  fontSize: "14px",
-                  fontStyle: "normal",
-                  fontWeight: 400,
-                  lineHeight: "normal",
-                }}
-              >
-                {s.title}
-              </div>
+              {s.title}
             </div>
-          ))}
-        </div>
-        {/* Prompt Input Section will remain below as is */}
-        {/* The chat input form and info stack remain unchanged below this wrapper */}
+          </div>
+        ))}
       </div>
 
       {/* Chat input form for the user to send messages */}
@@ -645,6 +618,13 @@ export default function AgentComponent() {
           Chai.AI may create unexpected results
         </div>
       </div>
+
+      {/* Display error message if one occurs */}
+      {error && (
+        <div style={{ color: "red", marginTop: "20px" }}>
+          <strong>Error:</strong> {error}
+        </div>
+      )}
 
       {/* Define keyframes for the spin animation */}
       <style jsx>{`

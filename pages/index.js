@@ -102,6 +102,10 @@ export default function AgentComponent() {
   // State to track if the submit button is hovered.
   const [isSubmitHovered, setIsSubmitHovered] = useState(false);
 
+  // Add state for input placeholder
+  const defaultPlaceholder = "Go! ahead..type something";
+  const [inputPlaceholder, setInputPlaceholder] = useState(defaultPlaceholder);
+
   // Initialize session ID and user ID on the client side
   useEffect(() => {
     setSessionId(getSessionId());
@@ -301,6 +305,100 @@ export default function AgentComponent() {
         border: "1px solid #ccc",
       }}
     >
+      {/* Suggestions Pills Section */}
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "5px",
+          maxWidth: "754px",
+          width: "100%",
+          margin: "0 auto 20px auto",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            width: "754px",
+            flexDirection: "column",
+            justifyContent: "flex-end",
+            alignItems: "center",
+            gap: "17px",
+            maxWidth: "100%",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              width: "710.912px",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              gap: "12px",
+              maxWidth: "100%",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "70px",
+                alignSelf: "stretch",
+                justifyContent: "center",
+                width: "100%",
+              }}
+            >
+              {suggestions.map((s, idx) => (
+                <div
+                  key={s.title}
+                  onMouseOver={() => setInputPlaceholder(s.message)}
+                  onMouseOut={() => setInputPlaceholder(defaultPlaceholder)}
+                  onClick={() => setMessage(s.message)}
+                  style={{
+                    display: "flex",
+                    width: "59.559px",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    gap: "7px",
+                    cursor: "pointer",
+                  }}
+                >
+                  <div
+                    style={{
+                      height: "59.559px",
+                      alignSelf: "stretch",
+                      borderRadius: "46px",
+                      border: "1px solid rgba(255, 255, 255, 0.40)",
+                      background: "rgba(128, 128, 128, 0.30)",
+                      backdropFilter: "blur(50px)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    {/* Placeholder for icon */}
+                    <div style={{ width: 32, height: 32, borderRadius: "50%", background: "#d3d3d3" }} />
+                  </div>
+                  <div
+                    style={{
+                      alignSelf: "stretch",
+                      color: "#000",
+                      textAlign: "center",
+                      fontFamily: 'Acumin Pro, Arial, sans-serif',
+                      fontSize: "14px",
+                      fontStyle: "normal",
+                      fontWeight: 400,
+                      lineHeight: "normal",
+                    }}
+                  >
+                    {s.title}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
       {/* Descriptive header for the chat application */}
       <div
         className="chat-header"
@@ -448,7 +546,7 @@ export default function AgentComponent() {
             <input
               type="text"
               id="message"
-              placeholder="Go! ahead..type something"
+              placeholder={inputPlaceholder}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               style={{

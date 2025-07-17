@@ -408,98 +408,63 @@ export default function AgentComponent() {
       </div>
 
       {/* Chat input form for the user to send messages */}
-      <form onSubmit={handleSubmit} style={{ display: "flex", gap: "0px" }}>
+      <form onSubmit={handleSubmit} style={{ border: "none", background: "none", padding: 0, margin: 0 }}>
         <div
+          className="chat-input-container"
           style={{
             display: "flex",
-            alignItems: "center",
-            gap: 0,
+            flexDirection: "column",
+            padding: "16px 12px",
+            justifyContent: "center",
+            alignItems: "flex-start",
+            gap: "8px",
+            alignSelf: "stretch",
+            borderRadius: "16px",
+            border: "0.5px solid rgba(0, 0, 0, 0.10)",
+            background: "#FFF",
             width: "100%",
-            borderBottom: "1px solid #ccc",
-            borderLeft: "1px solid #ccc",
-            borderRight: "1px solid #ccc",
-            borderRadius: "0 0 5px 5px",
-            overflow: "hidden",
-            backgroundColor: "#fff",
+            margin: "0 auto",
           }}
         >
-          <input
-            type="text"
-            id="message"
-            placeholder={chatConfig.chatInputPlaceholder}
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            style={{
-              flexGrow: 1,
-              padding: "10px",
-              border: "none",
-              outline: "none",
-              backgroundColor: "#fff",
-            }}
-          />
-          <button
-            type="submit"
-            aria-label="Send prompt"
-            data-testid="send-button"
-            disabled={isLoading}
-            onMouseOver={() => setIsSubmitHovered(true)}
-            onMouseOut={() => setIsSubmitHovered(false)}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              borderRadius: "9999px",
-              transition: "opacity 0.2s ease",
-              backgroundColor: isSubmitHovered ? "#007BFF" : "#000",
-              color: isSubmitHovered ? "#fff" : "#fff",
-              height: "36px",
-              width: "36px",
-              border: "5px solid #fff",
-              cursor: isLoading ? "default" : "pointer",
-            }}
-          >
-            {!isLoading ? (
-              <svg
-                width="36px"
-                height="36px"
-                viewBox="8 8 16 16"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M15.1918 8.90615C15.6381 8.45983 16.3618 8.45983 16.8081 8.90615L21.9509 14.049C22.3972 14.4953 22.3972 15.2189 21.9509 15.6652C21.5046 16.1116 20.781 16.1116 20.3347 15.6652L17.1428 12.4734V22.2857C17.1428 22.9169 16.6311 23.4286 15.9999 23.4286C15.3688 23.4286 14.8571 22.9169 14.8571 22.2857V12.4734L11.6652 15.6652C11.2189 16.1116 10.4953 16.1116 10.049 15.6652C9.60265 15.2189 9.60265 14.4953 10.049 14.049L15.1918 8.90615Z"
-                  fill="currentColor"
-                ></path>
-              </svg>
-            ) : (
-              <svg
-                width="36px"
-                height="36px"
-                viewBox="0 0 50 50"
-                style={{ animation: "spin 1s linear infinite" }}
-              >
-                <circle
-                  cx="25"
-                  cy="25"
-                  r="20"
-                  stroke="#888"
-                  strokeWidth="12"
-                  fill="none"
-                />
-                <circle
-                  cx="25"
-                  cy="25"
-                  r="20"
-                  stroke="#fff"
-                  strokeWidth="12"
-                  strokeDasharray="31.4 31.4"
-                  fill="none"
-                />
-              </svg>
-            )}
-          </button>
+          {/* Row 1: Input */}
+          <div className="input-row" style={{ width: "100%" }}>
+            <input
+              type="text"
+              id="message"
+              placeholder={chatConfig.chatInputPlaceholder}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              style={{
+                width: "100%",
+                padding: "10px 0",
+                border: "none",
+                outline: "none",
+                background: "transparent",
+                fontSize: "18px",
+              }}
+            />
+          </div>
+          {/* Row 2: Icons */}
+          <div className="icon-row" style={{ display: "flex", gap: "8px", width: "100%", alignItems: "center" }}>
+            <span style={{ cursor: "pointer", fontSize: "22px" }}>✨</span>
+            <button
+              type="submit"
+              aria-label="Send prompt"
+              data-testid="send-button"
+              disabled={isLoading}
+              style={{
+                background: "none",
+                border: "none",
+                cursor: isLoading ? "default" : "pointer",
+                fontSize: "22px",
+                padding: 0,
+                marginLeft: "auto",
+                color: "#000",
+              }}
+            >
+              ➤
+            </button>
+          </div>
         </div>
       </form>
 

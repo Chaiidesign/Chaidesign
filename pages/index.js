@@ -419,14 +419,16 @@ export default function AgentComponent() {
             alignItems: "flex-start",
             gap: "8px",
             alignSelf: "stretch",
+            maxWidth: "754px",
+            width: "100%",
+            boxSizing: "border-box",
             borderRadius: "16px",
             border: "0.5px solid rgba(0, 0, 0, 0.10)",
             background: "#FFF",
-            width: "100%",
             margin: "0 auto",
           }}
         >
-          {/* Row 1: Input (with new stack and typography) */}
+          {/* Row 1: Input (with stack and typography) */}
           <div
             style={{
               display: "flex",
@@ -440,6 +442,7 @@ export default function AgentComponent() {
               borderRadius: "8px",
               background: "#FFF",
               width: "100%",
+              boxSizing: "border-box",
             }}
           >
             <input
@@ -461,27 +464,9 @@ export default function AgentComponent() {
                 outline: "none",
                 background: "transparent",
                 width: "100%",
+                boxSizing: "border-box",
               }}
             />
-            {/* Custom placeholder overlay for bold 'Go!' */}
-            {message === "" && (
-              <div style={{
-                position: "absolute",
-                left: 16,
-                top: 0,
-                color: "#000",
-                fontFamily: 'Acumin Pro, Arial, sans-serif',
-                fontSize: "14px",
-                fontStyle: "normal",
-                fontWeight: 400,
-                lineHeight: "28px",
-                pointerEvents: "none",
-                display: "flex",
-                alignItems: "center",
-              }}>
-                <span style={{ fontWeight: 700, marginRight: 2 }}>Go!</span> ahead..type something
-              </div>
-            )}
           </div>
           {/* Row 2: Icons */}
           <div

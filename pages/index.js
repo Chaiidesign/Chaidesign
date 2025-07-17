@@ -374,17 +374,23 @@ export default function AgentComponent() {
                   }}
                 >
                   <div
+                    className="suggestion-circle"
                     style={{
+                      width: "59.559px",
                       height: "59.559px",
-                      alignSelf: "stretch",
+                      flexShrink: 0,
                       borderRadius: "46px",
                       border: "1px solid rgba(255, 255, 255, 0.40)",
                       background: "rgba(128, 128, 128, 0.30)",
+                      backgroundBlendMode: "luminosity",
                       backdropFilter: "blur(50px)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
+                      transition: "background 0.2s, border 0.2s",
                     }}
+                    onMouseOver={e => e.currentTarget.style.background = 'rgba(128,128,128,0.5)'}
+                    onMouseOut={e => e.currentTarget.style.background = 'rgba(128,128,128,0.30)'}
                   >
                     {/* Placeholder for icon */}
                     <div style={{ width: 32, height: 32, borderRadius: "50%", background: "#d3d3d3" }} />

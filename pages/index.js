@@ -427,7 +427,36 @@ export default function AgentComponent() {
           }}
         >
           {/* Row 1: Input */}
-          <div className="input-row" style={{ width: "100%" }}>
+          <div
+            className="input-row"
+            style={{
+              display: "flex",
+              minHeight: "28px",
+              padding: "4px 8px",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "flex-start",
+              gap: "8px",
+              alignSelf: "stretch",
+              borderRadius: "8px",
+              width: "100%",
+            }}
+          >
+            {/* Description or label */}
+            <div
+              style={{
+                alignSelf: "stretch",
+                color: "#000",
+                fontFamily: 'Acumin Pro, Arial, sans-serif',
+                fontSize: "14px",
+                fontStyle: "normal",
+                fontWeight: 400,
+                lineHeight: "normal",
+                letterSpacing: "0px",
+              }}
+            >
+              Type your message here...
+            </div>
             <input
               type="text"
               id="message"
@@ -436,7 +465,6 @@ export default function AgentComponent() {
               onChange={(e) => setMessage(e.target.value)}
               style={{
                 width: "100%",
-                padding: "10px 0",
                 border: "none",
                 outline: "none",
                 background: "transparent",

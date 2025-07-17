@@ -24,6 +24,7 @@ const chatConfig = {
     "I spend too much time with computers.",
     "I feel overwhelmed trying to keep up with AI trends.",
     "I am anxious about the future.",
+    "I am anxious about the future.",
   ],
   chatInputPlaceholder: "Chat with this agent...",
   maxChatHeight: 200,

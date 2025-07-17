@@ -426,9 +426,8 @@ export default function AgentComponent() {
             margin: "0 auto",
           }}
         >
-          {/* Row 1: Input */}
+          {/* Row 1: Input (with new stack and typography) */}
           <div
-            className="input-row"
             style={{
               display: "flex",
               minHeight: "28px",
@@ -439,11 +438,16 @@ export default function AgentComponent() {
               gap: "8px",
               alignSelf: "stretch",
               borderRadius: "8px",
+              background: "#FFF",
               width: "100%",
             }}
           >
-            {/* Description or label */}
-            <div
+            <input
+              type="text"
+              id="message"
+              placeholder={chatConfig.chatInputPlaceholder}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
               style={{
                 alignSelf: "stretch",
                 color: "#000",
@@ -453,22 +457,10 @@ export default function AgentComponent() {
                 fontWeight: 400,
                 lineHeight: "normal",
                 letterSpacing: "0px",
-              }}
-            >
-              Type your message here...
-            </div>
-            <input
-              type="text"
-              id="message"
-              placeholder={chatConfig.chatInputPlaceholder}
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              style={{
-                width: "100%",
                 border: "none",
                 outline: "none",
                 background: "transparent",
-                fontSize: "18px",
+                width: "100%",
               }}
             />
           </div>

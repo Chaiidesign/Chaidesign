@@ -442,14 +442,10 @@ export default function AgentComponent() {
               width: "100%",
             }}
           >
-            <div style={{ alignSelf: "stretch", color: "#000", fontFamily: 'Acumin Pro, Arial, sans-serif', fontSize: "14px", fontStyle: "normal", fontWeight: 400, lineHeight: "normal", letterSpacing: "0px" }}>
-              <span style={{ fontWeight: 700 }}>Go!</span> ahead..type something
-            </div>
             <input
               type="text"
               id="message"
-              // placeholder={chatConfig.chatInputPlaceholder}
-              placeholder=""
+              placeholder="Go! ahead..type something ----"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               style={{
@@ -468,7 +464,7 @@ export default function AgentComponent() {
               }}
             />
           </div>
-          {/* Row 2: Icons and Send Button */}
+          {/* Row 2: Icons */}
           <div
             className="icon-row"
             style={{
@@ -482,9 +478,10 @@ export default function AgentComponent() {
               flexWrap: "wrap",
               borderRadius: "8px",
               width: "100%",
+              justifyContent: "space-between"
             }}
           >
-            {/* Icon stack (left) */}
+            {/* Left icon stack (star) */}
             <div
               style={{
                 display: "flex",
@@ -497,27 +494,12 @@ export default function AgentComponent() {
                 borderRadius: "8px",
               }}
             >
-              {/* Star SVG */}
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none" style={{ width: "16px", height: "16px" }}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
                 <path fillRule="evenodd" clipRule="evenodd" d="M6.74998 3.7387L6.11944 5.44269C5.94219 5.9217 5.56452 6.29937 5.08552 6.47662L3.38152 7.10715L5.08551 7.73769C5.56452 7.91494 5.94219 8.29261 6.11944 8.77162L6.74998 10.4756L7.38051 8.77162C7.55776 8.29261 7.93543 7.91494 8.41444 7.73769L10.1184 7.10715L8.41444 6.47662C7.93543 6.29937 7.55776 5.9217 7.38051 5.44269L6.74998 3.7387ZM7.45337 2.75803C7.21175 2.10507 6.28821 2.10507 6.04659 2.75803L5.18159 5.09566C5.10563 5.30095 4.94377 5.4628 4.73848 5.53877L2.40086 6.40377C1.74789 6.64538 1.74789 7.56892 2.40086 7.81054L4.73848 8.67554C4.94377 8.75151 5.10563 8.91336 5.18159 9.11865L6.04659 11.4563C6.28821 12.1092 7.21175 12.1092 7.45337 11.4563L8.31836 9.11865C8.39433 8.91336 8.55619 8.75151 8.76148 8.67554L11.0991 7.81054C11.7521 7.56892 11.7521 6.64538 11.0991 6.40377L8.76148 5.53877C8.55619 5.4628 8.39433 5.30095 8.31836 5.09566L7.45337 2.75803Z" fill="black"/>
                 <path fillRule="evenodd" clipRule="evenodd" d="M11.7499 10.5183L11.5202 11.139C11.3936 11.4811 11.1238 11.7509 10.7817 11.8775L10.161 12.1072L10.7817 12.3368C11.1238 12.4635 11.3936 12.7332 11.5202 13.0754L11.7499 13.696L11.9795 13.0754C12.1062 12.7332 12.3759 12.4635 12.7181 12.3368L13.3387 12.1072L12.7181 11.8775C12.3759 11.7509 12.1062 11.4811 11.9795 11.139L11.7499 10.5183ZM12.2188 9.62443C12.0577 9.18912 11.442 9.18912 11.281 9.62443L10.8168 10.8787C10.7662 11.0156 10.6583 11.1235 10.5214 11.1741L9.26713 11.6383C8.83182 11.7993 8.83182 12.415 9.26713 12.5761L10.5214 13.0402C10.6583 13.0909 10.7662 13.1988 10.8168 13.3356L11.281 14.5899C11.442 15.0252 12.0577 15.0252 12.2188 14.5899L12.6829 13.3356C12.7336 13.1988 12.8415 13.0909 12.9783 13.0402L14.2326 12.5761C14.6679 12.415 14.6679 11.7993 14.2326 11.6383L12.9783 11.1741C12.8415 11.1235 12.7336 11.0156 12.6829 10.8787L12.2188 9.62443Z" fill="black"/>
               </svg>
             </div>
-            {/* Input stack (center) */}
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                alignContent: "center",
-                gap: "8px",
-                flex: "1 0 0",
-                flexWrap: "wrap",
-                borderRadius: "8px",
-              }}
-            >
-              {/* This is where the input is, already handled above */}
-            </div>
-            {/* Send button stack (right) */}
+            {/* Right icon stack (send button) */}
             <div
               style={{
                 display: "flex",
@@ -548,8 +530,7 @@ export default function AgentComponent() {
                   justifyContent: "center",
                 }}
               >
-                {/* Paperplane SVG */}
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none" style={{ width: "20px", height: "20px" }}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
                   <path d="M17.4898 9.26352L4.36484 1.77212C4.1436 1.64801 3.88983 1.59416 3.63726 1.6177C3.38468 1.64125 3.14525 1.74109 2.95076 1.90395C2.75628 2.06681 2.61594 2.28499 2.54841 2.52951C2.48087 2.77403 2.48933 3.0333 2.57265 3.2729L4.99452 10.3409C4.99421 10.3435 4.99421 10.3461 4.99452 10.3487C4.99409 10.3513 4.99409 10.3539 4.99452 10.3565L2.57265 17.4401C2.50592 17.6286 2.48538 17.8303 2.51274 18.0284C2.5401 18.2264 2.61458 18.415 2.72991 18.5783C2.84525 18.7417 2.99808 18.8749 3.17557 18.967C3.35307 19.059 3.55005 19.1071 3.74999 19.1073C3.96692 19.1067 4.18004 19.0502 4.36874 18.9432L17.4867 11.4393C17.6802 11.3309 17.8414 11.173 17.9537 10.9817C18.066 10.7905 18.1254 10.5728 18.1258 10.351C18.1262 10.1292 18.0676 9.9113 17.956 9.71964C17.8443 9.52799 17.6837 9.36949 17.4906 9.2604L17.4898 9.26352ZM3.74999 17.8573V17.8502L6.10468 10.9823H10.625C10.7908 10.9823 10.9497 10.9164 11.0669 10.7992C11.1841 10.682 11.25 10.523 11.25 10.3573C11.25 10.1915 11.1841 10.0325 11.0669 9.91533C10.9497 9.79812 10.7908 9.73227 10.625 9.73227H6.11093L3.75468 2.86665L3.74999 2.85727L16.875 10.344L3.74999 17.8573Z" fill="black"/>
                 </svg>
               </button>

@@ -356,11 +356,11 @@ export default function AgentComponent() {
         style={{
           display: "flex",
           width: "100%",
-          maxWidth: "711px",
+          maxWidth: "710.91px",
+          margin: "0 auto 24px auto",
           alignItems: "center",
-          gap: "70px",
-          margin: "0 auto 20px auto",
-          justifyContent: "center",
+          justifyContent: "space-between",
+          gap: "min(5vw, 32px)", // Responsive gap, adjust as needed
           flexWrap: "wrap",
         }}
       >
@@ -377,6 +377,8 @@ export default function AgentComponent() {
               alignItems: "center",
               gap: "7px",
               cursor: "pointer",
+              minWidth: "59.559px",
+              boxSizing: "border-box",
             }}
           >
             <div

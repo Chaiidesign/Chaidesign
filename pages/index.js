@@ -229,8 +229,14 @@ export default function AgentComponent() {
     } catch (err) {
       // Log the error to the console for debugging.
       console.error("Error fetching agent response:", err);
-      // Update the error state so that the user is informed.
-      setError(err.message);
+      // Show error as a chat reply from the agent
+      setConversation((prev) => [
+        ...prev,
+        {
+          role: "agent",
+          content: `Error: ${err.message}`,
+        },
+      ]);
     } finally {
       // Reset the loading state regardless of success or error.
       setIsLoading(false);
@@ -618,13 +624,6 @@ export default function AgentComponent() {
           Chai.AI may create unexpected results
         </div>
       </div>
-
-      {/* Display error message if one occurs */}
-      {error && (
-        <div style={{ color: "red", marginTop: "20px" }}>
-          <strong>Error:</strong> {error}
-        </div>
-      )}
 
       {/* Define keyframes for the spin animation */}
       <style jsx>{`

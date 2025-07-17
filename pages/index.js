@@ -366,70 +366,86 @@ export default function AgentComponent() {
       <div
         style={{
           display: "flex",
-          width: "100%",
-          maxWidth: "710.91px",
-          margin: "0 auto 24px auto",
+          width: "754px",
+          height: "215.702px",
+          flexDirection: "column",
           alignItems: "center",
-          justifyContent: "space-between",
-          gap: "min(5vw, 32px)", // Responsive gap, adjust as needed
-          flexWrap: "wrap",
+          gap: "5px",
+          flexShrink: 0,
+          margin: "0 auto 24px auto",
+          maxWidth: "100%",
         }}
       >
-        {suggestions.map((s, idx) => (
-          <div
-            key={s.title}
-            onMouseOver={() => setInputPlaceholder(s.message)}
-            onMouseOut={() => setInputPlaceholder(defaultPlaceholder)}
-            onClick={() => setMessage(s.message)}
-            style={{
-              display: "flex",
-              width: "59.559px",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: "7px",
-              cursor: "pointer",
-              minWidth: "59.559px",
-              boxSizing: "border-box",
-            }}
-          >
+        {/* Suggestion Pills Row */}
+        <div
+          style={{
+            display: "flex",
+            width: "100%",
+            maxWidth: "710.91px",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: "min(5vw, 32px)",
+            flexWrap: "wrap",
+          }}
+        >
+          {suggestions.map((s, idx) => (
             <div
-              className="suggestion-circle"
+              key={s.title}
+              onMouseOver={() => setInputPlaceholder(s.message)}
+              onMouseOut={() => setInputPlaceholder(defaultPlaceholder)}
+              onClick={() => setMessage(s.message)}
               style={{
-                width: "59.559px",
-                height: "59.559px",
-                flexShrink: 0,
-                borderRadius: "46px",
-                border: "1px solid #000",
-                background: "rgba(128, 128, 128, 0.30)",
-                backgroundBlendMode: "luminosity",
-                backdropFilter: "blur(50px)",
                 display: "flex",
+                width: "59.559px",
+                flexDirection: "column",
                 alignItems: "center",
-                justifyContent: "center",
-                transition: "background 0.2s, border 0.2s",
-              }}
-              onMouseOver={e => e.currentTarget.style.background = 'rgba(128,128,128,0.5)'}
-              onMouseOut={e => e.currentTarget.style.background = 'rgba(128,128,128,0.30)'}
-            >
-              {/* Placeholder for icon */}
-              <div style={{ width: 32, height: 32, borderRadius: "50%", background: "#d3d3d3" }} />
-            </div>
-            <div
-              style={{
-                alignSelf: "stretch",
-                color: "#000",
-                textAlign: "center",
-                fontFamily: 'Acumin Pro, Arial, sans-serif',
-                fontSize: "14px",
-                fontStyle: "normal",
-                fontWeight: 400,
-                lineHeight: "normal",
+                gap: "7px",
+                cursor: "pointer",
+                minWidth: "59.559px",
+                boxSizing: "border-box",
               }}
             >
-              {s.title}
+              <div
+                className="suggestion-circle"
+                style={{
+                  width: "59.559px",
+                  height: "59.559px",
+                  flexShrink: 0,
+                  borderRadius: "46px",
+                  border: "1px solid #000",
+                  background: "rgba(128, 128, 128, 0.30)",
+                  backgroundBlendMode: "luminosity",
+                  backdropFilter: "blur(50px)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  transition: "background 0.2s, border 0.2s",
+                }}
+                onMouseOver={e => e.currentTarget.style.background = 'rgba(128,128,128,0.5)'}
+                onMouseOut={e => e.currentTarget.style.background = 'rgba(128,128,128,0.30)'}
+              >
+                {/* Placeholder for icon */}
+                <div style={{ width: 32, height: 32, borderRadius: "50%", background: "#d3d3d3" }} />
+              </div>
+              <div
+                style={{
+                  alignSelf: "stretch",
+                  color: "#000",
+                  textAlign: "center",
+                  fontFamily: 'Acumin Pro, Arial, sans-serif',
+                  fontSize: "14px",
+                  fontStyle: "normal",
+                  fontWeight: 400,
+                  lineHeight: "normal",
+                }}
+              >
+                {s.title}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+        {/* Prompt Input Section will remain below as is */}
+        {/* The chat input form and info stack remain unchanged below this wrapper */}
       </div>
 
       {/* Chat input form for the user to send messages */}

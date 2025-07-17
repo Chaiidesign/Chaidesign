@@ -445,7 +445,7 @@ export default function AgentComponent() {
             <input
               type="text"
               id="message"
-              placeholder="Go! ahead..type something ----"
+              placeholder="Go! ahead..type something"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               style={{
@@ -463,6 +463,25 @@ export default function AgentComponent() {
                 width: "100%",
               }}
             />
+            {/* Custom placeholder overlay for bold 'Go!' */}
+            {message === "" && (
+              <div style={{
+                position: "absolute",
+                left: 16,
+                top: 0,
+                color: "#000",
+                fontFamily: 'Acumin Pro, Arial, sans-serif',
+                fontSize: "14px",
+                fontStyle: "normal",
+                fontWeight: 400,
+                lineHeight: "28px",
+                pointerEvents: "none",
+                display: "flex",
+                alignItems: "center",
+              }}>
+                <span style={{ fontWeight: 700, marginRight: 2 }}>Go!</span> ahead..type something
+              </div>
+            )}
           </div>
           {/* Row 2: Icons */}
           <div
@@ -478,7 +497,7 @@ export default function AgentComponent() {
               flexWrap: "wrap",
               borderRadius: "8px",
               width: "100%",
-              justifyContent: "space-between"
+              justifyContent: "space-between",
             }}
           >
             {/* Left icon stack (star) */}
@@ -499,6 +518,7 @@ export default function AgentComponent() {
                 <path fillRule="evenodd" clipRule="evenodd" d="M11.7499 10.5183L11.5202 11.139C11.3936 11.4811 11.1238 11.7509 10.7817 11.8775L10.161 12.1072L10.7817 12.3368C11.1238 12.4635 11.3936 12.7332 11.5202 13.0754L11.7499 13.696L11.9795 13.0754C12.1062 12.7332 12.3759 12.4635 12.7181 12.3368L13.3387 12.1072L12.7181 11.8775C12.3759 11.7509 12.1062 11.4811 11.9795 11.139L11.7499 10.5183ZM12.2188 9.62443C12.0577 9.18912 11.442 9.18912 11.281 9.62443L10.8168 10.8787C10.7662 11.0156 10.6583 11.1235 10.5214 11.1741L9.26713 11.6383C8.83182 11.7993 8.83182 12.415 9.26713 12.5761L10.5214 13.0402C10.6583 13.0909 10.7662 13.1988 10.8168 13.3356L11.281 14.5899C11.442 15.0252 12.0577 15.0252 12.2188 14.5899L12.6829 13.3356C12.7336 13.1988 12.8415 13.0909 12.9783 13.0402L14.2326 12.5761C14.6679 12.415 14.6679 11.7993 14.2326 11.6383L12.9783 11.1741C12.8415 11.1235 12.7336 11.0156 12.6829 10.8787L12.2188 9.62443Z" fill="black"/>
               </svg>
             </div>
+            {/* Middle stack (input area) - already handled above */}
             {/* Right icon stack (send button) */}
             <div
               style={{

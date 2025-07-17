@@ -229,8 +229,14 @@ export default function AgentComponent() {
     } catch (err) {
       // Log the error to the console for debugging.
       console.error("Error fetching agent response:", err);
-      // Update the error state so that the user is informed.
-      setError(err.message);
+      // Show error as a chat reply from the agent
+      setConversation((prev) => [
+        ...prev,
+        {
+          role: "agent",
+          content: `Error: ${err.message}`,
+        },
+      ]);
     } finally {
       // Reset the loading state regardless of success or error.
       setIsLoading(false);
@@ -306,13 +312,18 @@ export default function AgentComponent() {
   return (
     <div
       style={{
-        padding: "5px",
-        width: "100vw",
-        maxWidth: "600px",
-        margin: "0 auto",
+        padding: 0,
+        width: "100%",
+        maxWidth: "710.91px",
+        margin: "40px auto 0 auto",
         fontFamily: "Arial, sans-serif",
-        borderRadius: "5px",
-        border: "1px solid #ccc",
+        borderRadius: 0,
+        boxShadow: "none",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        background: "none",
+        border: "none",
       }}
     >
       {/* Chat conversation container displaying messages in bubbles */}
@@ -325,10 +336,10 @@ export default function AgentComponent() {
           marginBottom: "0px",
           height: chatConfig.maxChatHeight, // Set a fixed height for the chat container
           overflowY: "auto", // Enable vertical scrolling
-          border: "2px solid #000", // Optional: border around the chat area
-          padding: "0px",
-          borderRadius: "5px 5px 0 0",
-          backgroundColor: "#eee",
+          border: "none",
+          padding: 0,
+          borderRadius: 0,
+          background: "none",
           width: "100%",
         }}
       >
@@ -350,281 +361,310 @@ export default function AgentComponent() {
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Suggested Prompts Section */}
-      {/* Suggestion Pills Section (replaces old prompts) */}
+      {/* OUTERMOST LAYER */}
       <div
         style={{
           display: "flex",
-          width: "100%",
-          maxWidth: "710.91px",
-          margin: "0 auto 24px auto",
+          width: "754px",
+          height: "205px",
+          minWidth: "400px",
+          maxWidth: "754px",
+          flexDirection: "column",
           alignItems: "center",
-          justifyContent: "space-between",
-          gap: "min(5vw, 32px)", // Responsive gap, adjust as needed
-          flexWrap: "wrap",
+          gap: "5px",
+          flexShrink: 0,
+          margin: "0 auto 24px auto",
         }}
       >
-        {suggestions.map((s, idx) => (
-          <div
-            key={s.title}
-            onMouseOver={() => setInputPlaceholder(s.message)}
-            onMouseOut={() => setInputPlaceholder(defaultPlaceholder)}
-            onClick={() => setMessage(s.message)}
-            style={{
-              display: "flex",
-              width: "59.559px",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: "7px",
-              cursor: "pointer",
-              minWidth: "59.559px",
-              boxSizing: "border-box",
-            }}
-          >
-            <div
-              className="suggestion-circle"
-              style={{
-                width: "59.559px",
-                height: "59.559px",
-                flexShrink: 0,
-                borderRadius: "46px",
-                border: "1px solid #000",
-                background: "rgba(128, 128, 128, 0.30)",
-                backgroundBlendMode: "luminosity",
-                backdropFilter: "blur(50px)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                transition: "background 0.2s, border 0.2s",
-              }}
-              onMouseOver={e => e.currentTarget.style.background = 'rgba(128,128,128,0.5)'}
-              onMouseOut={e => e.currentTarget.style.background = 'rgba(128,128,128,0.30)'}
-            >
-              {/* Placeholder for icon */}
-              <div style={{ width: 32, height: 32, borderRadius: "50%", background: "#d3d3d3" }} />
-            </div>
-            <div
-              style={{
-                alignSelf: "stretch",
-                color: "#000",
-                textAlign: "center",
-                fontFamily: 'Acumin Pro, Arial, sans-serif',
-                fontSize: "14px",
-                fontStyle: "normal",
-                fontWeight: 400,
-                lineHeight: "normal",
-              }}
-            >
-              {s.title}
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Chat input form for the user to send messages */}
-      <form onSubmit={handleSubmit} style={{ border: "none", background: "none", padding: 0, margin: 0 }}>
+        {/* SUGGESTION PILLS GRID */}
         <div
-          className="chat-input-container"
           style={{
-            display: "flex",
-            flexDirection: "column",
-            padding: "16px 12px",
-            justifyContent: "center",
-            alignItems: "flex-start",
-            gap: "8px",
+            display: "grid",
+            height: "84px",
+            padding: "0px 41.774px 0.441px 41px",
+            rowGap: "62px",
+            columnGap: "62px",
             alignSelf: "stretch",
-            maxWidth: "754px",
+            gridTemplateRows: "repeat(1, minmax(0, 1fr))",
+            gridTemplateColumns: "repeat(6, minmax(0, 1fr))",
             width: "100%",
             boxSizing: "border-box",
-            borderRadius: "16px",
-            border: "0.5px solid rgba(0, 0, 0, 0.10)",
-            background: "#FFF",
-            margin: "0 auto",
           }}
         >
-          {/* Row 1: Input (with stack and typography) */}
-          <div
-            style={{
-              display: "flex",
-              minHeight: "28px",
-              padding: "4px 8px",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "flex-start",
-              gap: "8px",
-              alignSelf: "stretch",
-              borderRadius: "8px",
-              background: "#FFF",
-              width: "100%",
-              boxSizing: "border-box",
-            }}
-          >
-            <input
-              type="text"
-              id="message"
-              placeholder={inputPlaceholder}
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
+          {suggestions.map((s, idx) => (
+            <div
+              key={s.title}
+              onMouseOver={() => setInputPlaceholder(s.message)}
+              onMouseOut={() => setInputPlaceholder(defaultPlaceholder)}
+              onClick={() => setMessage(s.message)}
               style={{
-                alignSelf: "stretch",
-                color: "#000",
-                fontFamily: 'Acumin Pro, Arial, sans-serif',
-                fontSize: "14px",
-                fontStyle: "normal",
-                fontWeight: 400,
-                lineHeight: "normal",
-                letterSpacing: "0px",
-                border: "none",
-                outline: "none",
-                background: "transparent",
-                width: "100%",
+                display: "flex",
+                width: "59.559px",
+                height: "83.559px",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "7px",
+                flexShrink: 0,
+                gridRow: "1 / span 1",
+                gridColumn: `${idx + 1} / span 1`,
                 boxSizing: "border-box",
-              }}
-            />
-          </div>
-          {/* Row 2: Icons */}
-          <div
-            className="icon-row"
-            style={{
-              display: "flex",
-              height: "28px",
-              minHeight: "28px",
-              alignItems: "center",
-              alignContent: "center",
-              gap: "8px",
-              alignSelf: "stretch",
-              flexWrap: "wrap",
-              borderRadius: "8px",
-              width: "100%",
-              justifyContent: "space-between",
-            }}
-          >
-            {/* Left icon stack (star) */}
-            <div
-              style={{
-                display: "flex",
-                minWidth: "28px",
-                minHeight: "28px",
-                padding: "4px",
-                justifyContent: "center",
-                alignItems: "center",
-                gap: "4px",
-                borderRadius: "8px",
+                cursor: "pointer",
               }}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
-                <path fillRule="evenodd" clipRule="evenodd" d="M6.74998 3.7387L6.11944 5.44269C5.94219 5.9217 5.56452 6.29937 5.08552 6.47662L3.38152 7.10715L5.08551 7.73769C5.56452 7.91494 5.94219 8.29261 6.11944 8.77162L6.74998 10.4756L7.38051 8.77162C7.55776 8.29261 7.93543 7.91494 8.41444 7.73769L10.1184 7.10715L8.41444 6.47662C7.93543 6.29937 7.55776 5.9217 7.38051 5.44269L6.74998 3.7387ZM7.45337 2.75803C7.21175 2.10507 6.28821 2.10507 6.04659 2.75803L5.18159 5.09566C5.10563 5.30095 4.94377 5.4628 4.73848 5.53877L2.40086 6.40377C1.74789 6.64538 1.74789 7.56892 2.40086 7.81054L4.73848 8.67554C4.94377 8.75151 5.10563 8.91336 5.18159 9.11865L6.04659 11.4563C6.28821 12.1092 7.21175 12.1092 7.45337 11.4563L8.31836 9.11865C8.39433 8.91336 8.55619 8.75151 8.76148 8.67554L11.0991 7.81054C11.7521 7.56892 11.7521 6.64538 11.0991 6.40377L8.76148 5.53877C8.55619 5.4628 8.39433 5.30095 8.31836 5.09566L7.45337 2.75803Z" fill="black"/>
-                <path fillRule="evenodd" clipRule="evenodd" d="M11.7499 10.5183L11.5202 11.139C11.3936 11.4811 11.1238 11.7509 10.7817 11.8775L10.161 12.1072L10.7817 12.3368C11.1238 12.4635 11.3936 12.7332 11.5202 13.0754L11.7499 13.696L11.9795 13.0754C12.1062 12.7332 12.3759 12.4635 12.7181 12.3368L13.3387 12.1072L12.7181 11.8775C12.3759 11.7509 12.1062 11.4811 11.9795 11.139L11.7499 10.5183ZM12.2188 9.62443C12.0577 9.18912 11.442 9.18912 11.281 9.62443L10.8168 10.8787C10.7662 11.0156 10.6583 11.1235 10.5214 11.1741L9.26713 11.6383C8.83182 11.7993 8.83182 12.415 9.26713 12.5761L10.5214 13.0402C10.6583 13.0909 10.7662 13.1988 10.8168 13.3356L11.281 14.5899C11.442 15.0252 12.0577 15.0252 12.2188 14.5899L12.6829 13.3356C12.7336 13.1988 12.8415 13.0909 12.9783 13.0402L14.2326 12.5761C14.6679 12.415 14.6679 11.7993 14.2326 11.6383L12.9783 11.1741C12.8415 11.1235 12.7336 11.0156 12.6829 10.8787L12.2188 9.62443Z" fill="black"/>
-              </svg>
-            </div>
-            {/* Middle stack (input area) - already handled above */}
-            {/* Right icon stack (send button) */}
-            <div
-              style={{
-                display: "flex",
-                minWidth: "28px",
-                minHeight: "28px",
-                padding: "4px",
-                justifyContent: "center",
-                alignItems: "center",
-                gap: "8px",
-                borderRadius: "8px",
-              }}
-            >
-              <button
-                type="submit"
-                aria-label="Send prompt"
-                data-testid="send-button"
-                disabled={isLoading}
+              <div
+                className="suggestion-circle"
                 style={{
-                  background: "none",
-                  border: "none",
-                  cursor: isLoading ? "default" : "pointer",
-                  padding: 0,
-                  margin: 0,
-                  width: "20px",
-                  height: "20px",
+                  width: "59.559px",
+                  height: "59.559px",
+                  flexShrink: 0,
+                  borderRadius: "46px",
+                  border: "1px solid #000",
+                  background: "rgba(128, 128, 128, 0.30)",
+                  backgroundBlendMode: "luminosity",
+                  backdropFilter: "blur(50px)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
+                  transition: "background 0.2s, border 0.2s",
+                }}
+                onMouseOver={e => e.currentTarget.style.background = 'rgba(128,128,128,0.5)'}
+                onMouseOut={e => e.currentTarget.style.background = 'rgba(128,128,128,0.30)'}
+              >
+                {/* Placeholder for icon */}
+                <div style={{ width: 32, height: 32, borderRadius: "50%", background: "#d3d3d3" }} />
+              </div>
+              <div
+                style={{
+                  alignSelf: "stretch",
+                  color: "#000",
+                  textAlign: "center",
+                  fontFamily: 'Acumin Pro, Arial, sans-serif',
+                  fontSize: "14px",
+                  fontStyle: "normal",
+                  fontWeight: 400,
+                  lineHeight: "normal",
                 }}
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
-                  <path d="M17.4898 9.26352L4.36484 1.77212C4.1436 1.64801 3.88983 1.59416 3.63726 1.6177C3.38468 1.64125 3.14525 1.74109 2.95076 1.90395C2.75628 2.06681 2.61594 2.28499 2.54841 2.52951C2.48087 2.77403 2.48933 3.0333 2.57265 3.2729L4.99452 10.3409C4.99421 10.3435 4.99421 10.3461 4.99452 10.3487C4.99409 10.3513 4.99409 10.3539 4.99452 10.3565L2.57265 17.4401C2.50592 17.6286 2.48538 17.8303 2.51274 18.0284C2.5401 18.2264 2.61458 18.415 2.72991 18.5783C2.84525 18.7417 2.99808 18.8749 3.17557 18.967C3.35307 19.059 3.55005 19.1071 3.74999 19.1073C3.96692 19.1067 4.18004 19.0502 4.36874 18.9432L17.4867 11.4393C17.6802 11.3309 17.8414 11.173 17.9537 10.9817C18.066 10.7905 18.1254 10.5728 18.1258 10.351C18.1262 10.1292 18.0676 9.9113 17.956 9.71964C17.8443 9.52799 17.6837 9.36949 17.4906 9.2604L17.4898 9.26352ZM3.74999 17.8573V17.8502L6.10468 10.9823H10.625C10.7908 10.9823 10.9497 10.9164 11.0669 10.7992C11.1841 10.682 11.25 10.523 11.25 10.3573C11.25 10.1915 11.1841 10.0325 11.0669 9.91533C10.9497 9.79812 10.7908 9.73227 10.625 9.73227H6.11093L3.75468 2.86665L3.74999 2.85727L16.875 10.344L3.74999 17.8573Z" fill="black"/>
-                </svg>
-              </button>
+                {s.title}
+              </div>
+            </div>
+          ))}
+        </div>
+        {/* INPUT STACK BELOW */}
+        <div
+          style={{
+            display: "flex",
+            minWidth: "400px",
+            maxWidth: "754px",
+            flexDirection: "column",
+            justifyContent: "flex-end",
+            alignItems: "center",
+            gap: "17px",
+            alignSelf: "stretch",
+            width: "100%",
+            boxSizing: "border-box",
+          }}
+        >
+          {/* The chat input form and info stack remain unchanged below this wrapper */}
+          {/* Chat input form for the user to send messages */}
+          <form onSubmit={handleSubmit} style={{ border: "none", background: "none", padding: 0, margin: 0 }}>
+            <div
+              className="chat-input-container"
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                padding: "16px 12px",
+                justifyContent: "center",
+                alignItems: "flex-start",
+                gap: "8px",
+                alignSelf: "stretch",
+                maxWidth: "754px",
+                width: "100%",
+                boxSizing: "border-box",
+                borderRadius: "16px",
+                border: "0.5px solid rgba(0, 0, 0, 0.10)",
+                background: "#FFF",
+                margin: "0 auto",
+              }}
+            >
+              {/* Row 1: Input (with stack and typography) */}
+              <div
+                style={{
+                  display: "flex",
+                  minHeight: "28px",
+                  padding: "4px 8px",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "flex-start",
+                  gap: "8px",
+                  alignSelf: "stretch",
+                  borderRadius: "8px",
+                  background: "#FFF",
+                  width: "100%",
+                  boxSizing: "border-box",
+                }}
+              >
+                <input
+                  type="text"
+                  id="message"
+                  placeholder={inputPlaceholder}
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  style={{
+                    alignSelf: "stretch",
+                    color: "#000",
+                    fontFamily: 'Acumin Pro, Arial, sans-serif',
+                    fontSize: "14px",
+                    fontStyle: "normal",
+                    fontWeight: 400,
+                    lineHeight: "normal",
+                    letterSpacing: "0px",
+                    border: "none",
+                    outline: "none",
+                    background: "transparent",
+                    width: "100%",
+                    boxSizing: "border-box",
+                  }}
+                />
+              </div>
+              {/* Row 2: Icons */}
+              <div
+                className="icon-row"
+                style={{
+                  display: "flex",
+                  height: "28px",
+                  minHeight: "28px",
+                  alignItems: "center",
+                  alignContent: "center",
+                  gap: "8px",
+                  alignSelf: "stretch",
+                  flexWrap: "wrap",
+                  borderRadius: "8px",
+                  width: "100%",
+                  justifyContent: "space-between",
+                }}
+              >
+                {/* Left icon stack (star) */}
+                <div
+                  style={{
+                    display: "flex",
+                    minWidth: "28px",
+                    minHeight: "28px",
+                    padding: "4px",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: "4px",
+                    borderRadius: "8px",
+                  }}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+                    <path fillRule="evenodd" clipRule="evenodd" d="M6.74998 3.7387L6.11944 5.44269C5.94219 5.9217 5.56452 6.29937 5.08552 6.47662L3.38152 7.10715L5.08551 7.73769C5.56452 7.91494 5.94219 8.29261 6.11944 8.77162L6.74998 10.4756L7.38051 8.77162C7.55776 8.29261 7.93543 7.91494 8.41444 7.73769L10.1184 7.10715L8.41444 6.47662C7.93543 6.29937 7.55776 5.9217 7.38051 5.44269L6.74998 3.7387ZM7.45337 2.75803C7.21175 2.10507 6.28821 2.10507 6.04659 2.75803L5.18159 5.09566C5.10563 5.30095 4.94377 5.4628 4.73848 5.53877L2.40086 6.40377C1.74789 6.64538 1.74789 7.56892 2.40086 7.81054L4.73848 8.67554C4.94377 8.75151 5.10563 8.91336 5.18159 9.11865L6.04659 11.4563C6.28821 12.1092 7.21175 12.1092 7.45337 11.4563L8.31836 9.11865C8.39433 8.91336 8.55619 8.75151 8.76148 8.67554L11.0991 7.81054C11.7521 7.56892 11.7521 6.64538 11.0991 6.40377L8.76148 5.53877C8.55619 5.4628 8.39433 5.30095 8.31836 5.09566L7.45337 2.75803Z" fill="black"/>
+                    <path fillRule="evenodd" clipRule="evenodd" d="M11.7499 10.5183L11.5202 11.139C11.3936 11.4811 11.1238 11.7509 10.7817 11.8775L10.161 12.1072L10.7817 12.3368C11.1238 12.4635 11.3936 12.7332 11.5202 13.0754L11.7499 13.696L11.9795 13.0754C12.1062 12.7332 12.3759 12.4635 12.7181 12.3368L13.3387 12.1072L12.7181 11.8775C12.3759 11.7509 12.1062 11.4811 11.9795 11.139L11.7499 10.5183ZM12.2188 9.62443C12.0577 9.18912 11.442 9.18912 11.281 9.62443L10.8168 10.8787C10.7662 11.0156 10.6583 11.1235 10.5214 11.1741L9.26713 11.6383C8.83182 11.7993 8.83182 12.415 9.26713 12.5761L10.5214 13.0402C10.6583 13.0909 10.7662 13.1988 10.8168 13.3356L11.281 14.5899C11.442 15.0252 12.0577 15.0252 12.2188 14.5899L12.6829 13.3356C12.7336 13.1988 12.8415 13.0909 12.9783 13.0402L14.2326 12.5761C14.6679 12.415 14.6679 11.7993 14.2326 11.6383L12.9783 11.1741C12.8415 11.1235 12.7336 11.0156 12.6829 10.8787L12.2188 9.62443Z" fill="black"/>
+                  </svg>
+                </div>
+                {/* Middle stack (input area) - already handled above */}
+                {/* Right icon stack (send button) */}
+                <div
+                  style={{
+                    display: "flex",
+                    minWidth: "28px",
+                    minHeight: "28px",
+                    padding: "4px",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: "8px",
+                    borderRadius: "8px",
+                  }}
+                >
+                  <button
+                    type="submit"
+                    aria-label="Send prompt"
+                    data-testid="send-button"
+                    disabled={isLoading}
+                    style={{
+                      background: "none",
+                      border: "none",
+                      cursor: isLoading ? "default" : "pointer",
+                      padding: 0,
+                      margin: 0,
+                      width: "20px",
+                      height: "20px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
+                      <path d="M17.4898 9.26352L4.36484 1.77212C4.1436 1.64801 3.88983 1.59416 3.63726 1.6177C3.38468 1.64125 3.14525 1.74109 2.95076 1.90395C2.75628 2.06681 2.61594 2.28499 2.54841 2.52951C2.48087 2.77403 2.48933 3.0333 2.57265 3.2729L4.99452 10.3409C4.99421 10.3435 4.99421 10.3461 4.99452 10.3487C4.99409 10.3513 4.99409 10.3539 4.99452 10.3565L2.57265 17.4401C2.50592 17.6286 2.48538 17.8303 2.51274 18.0284C2.5401 18.2264 2.61458 18.415 2.72991 18.5783C2.84525 18.7417 2.99808 18.8749 3.17557 18.967C3.35307 19.059 3.55005 19.1071 3.74999 19.1073C3.96692 19.1067 4.18004 19.0502 4.36874 18.9432L17.4867 11.4393C17.6802 11.3309 17.8414 11.173 17.9537 10.9817C18.066 10.7905 18.1254 10.5728 18.1258 10.351C18.1262 10.1292 18.0676 9.9113 17.956 9.71964C17.8443 9.52799 17.6837 9.36949 17.4906 9.2604L17.4898 9.26352ZM3.74999 17.8573V17.8502L6.10468 10.9823H10.625C10.7908 10.9823 10.9497 10.9164 11.0669 10.7992C11.1841 10.682 11.25 10.523 11.25 10.3573C11.25 10.1915 11.1841 10.0325 11.0669 9.91533C10.9497 9.79812 10.7908 9.73227 10.625 9.73227H6.11093L3.75468 2.86665L3.74999 2.85727L16.875 10.344L3.74999 17.8573Z" fill="black"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+
+          {/* Info stack below chat */}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "9px",
+              marginTop: "8px",
+            }}
+          >
+            {/* BETA badge */}
+            <div
+              style={{
+                display: "flex",
+                width: "33px",
+                height: "14.143px",
+                padding: "3.367px",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "6.735px",
+                borderRadius: "14.143px",
+                background: "#D9D9D9",
+              }}
+            >
+              <span
+                style={{
+                  width: "27px",
+                  height: "9px",
+                  flexShrink: 0,
+                  color: "#424242",
+                  textAlign: "center",
+                  fontFamily: 'Acumin Pro',
+                  fontSize: "8.082px",
+                  fontStyle: "normal",
+                  fontWeight: 700,
+                  lineHeight: "normal",
+                  letterSpacing: 0,
+                }}
+              >
+                BETA
+              </span>
+            </div>
+            {/* Text holder */}
+            <div
+              style={{
+                width: "186px",
+                height: "11px",
+                color: "#424242",
+                fontFamily: 'Acumin Pro',
+                fontSize: "11px",
+                fontStyle: "normal",
+                fontWeight: 400,
+                lineHeight: "normal",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              Chai.AI may create unexpected results
             </div>
           </div>
         </div>
-      </form>
-
-      {/* Info stack below chat */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          gap: "9px",
-          marginTop: "8px",
-        }}
-      >
-        {/* BETA badge */}
-        <div
-          style={{
-            display: "flex",
-            width: "33px",
-            height: "14.143px",
-            padding: "3.367px",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: "6.735px",
-            borderRadius: "14.143px",
-            background: "#D9D9D9",
-          }}
-        >
-          <span
-            style={{
-              width: "27px",
-              height: "9px",
-              flexShrink: 0,
-              color: "#424242",
-              textAlign: "center",
-              fontFamily: 'Acumin Pro',
-              fontSize: "8.082px",
-              fontStyle: "normal",
-              fontWeight: 700,
-              lineHeight: "normal",
-              letterSpacing: 0,
-            }}
-          >
-            BETA
-          </span>
-        </div>
-        {/* Text holder */}
-        <div
-          style={{
-            width: "186px",
-            height: "11px",
-            color: "#424242",
-            fontFamily: 'Acumin Pro',
-            fontSize: "11px",
-            fontStyle: "normal",
-            fontWeight: 400,
-            lineHeight: "normal",
-            display: "flex",
-            alignItems: "center",
-          }}
-        >
-          Chai.AI may create unexpected results
-        </div>
       </div>
-
-      {/* Display error message if one occurs */}
-      {error && (
-        <div style={{ color: "red", marginTop: "20px" }}>
-          <strong>Error:</strong> {error}
-        </div>
-      )}
 
       {/* Define keyframes for the spin animation */}
       <style jsx>{`

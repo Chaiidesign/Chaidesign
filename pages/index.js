@@ -76,6 +76,16 @@ const getUserId = () => {
  * @returns {JSX.Element} The rendered chat interface.
  */
 export default function AgentComponent() {
+  // Suggestion data (move here for SSR compatibility)
+  const suggestions = [
+    { title: "Work ex", message: "Tell me about your work experience" },
+    { title: "Design", message: "What is your design process?" },
+    { title: "Art", message: "Share your favorite art style" },
+    { title: "Games", message: "What games do you enjoy?" },
+    { title: "Food", message: "What's your favorite food?" },
+    { title: "Music", message: "What music do you like?" }
+  ];
+
   // State to store the user's current input from the text field.
   const [message, setMessage] = useState("");
 

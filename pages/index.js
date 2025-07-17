@@ -312,13 +312,18 @@ export default function AgentComponent() {
   return (
     <div
       style={{
-        padding: "5px",
-        width: "100vw",
-        maxWidth: "600px",
-        margin: "0 auto",
+        padding: 0,
+        width: "100%",
+        maxWidth: "710.91px",
+        margin: "40px auto 0 auto",
         fontFamily: "Arial, sans-serif",
-        borderRadius: "5px",
-        border: "1px solid #ccc",
+        borderRadius: 0,
+        boxShadow: "none",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        background: "none",
+        border: "none",
       }}
     >
       {/* Chat conversation container displaying messages in bubbles */}
@@ -331,10 +336,10 @@ export default function AgentComponent() {
           marginBottom: "0px",
           height: chatConfig.maxChatHeight, // Set a fixed height for the chat container
           overflowY: "auto", // Enable vertical scrolling
-          border: "2px solid #000", // Optional: border around the chat area
-          padding: "0px",
-          borderRadius: "5px 5px 0 0",
-          backgroundColor: "#eee",
+          border: "none",
+          padding: 0,
+          borderRadius: 0,
+          background: "none",
           width: "100%",
         }}
       >

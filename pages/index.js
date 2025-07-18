@@ -118,6 +118,10 @@ export default function AgentComponent() {
   // Track if user is hovering a suggestion and the previous input value
   const [prevInput, setPrevInput] = useState("");
 
+  // Feedback and hover state per message
+  const [feedbackArr, setFeedbackArr] = useState([]);
+  const [hoveredArr, setHoveredArr] = useState([]);
+
   // Initialize session ID and user ID on the client side
   useEffect(() => {
     setSessionId(getSessionId());
@@ -362,14 +366,36 @@ export default function AgentComponent() {
         }}
       >
         {conversation.map((msg, index) => {
-          // Feedback state per message
-          const [feedback, setFeedback] = useState({ like: false, dislike: false, copied: false });
-          const [hovered, setHovered] = useState("");
+          const feedback = feedbackArr[index] || { like: false, dislike: false, copied: false };
+          const hovered = hoveredArr[index] || "";
           // Copy handler
-          const handleCopy = (text) => {
+          const handleCopy = (text, idx) => {
             navigator.clipboard.writeText(text);
-            setFeedback({ ...feedback, copied: true });
-            setTimeout(() => setFeedback({ ...feedback, copied: false }), 1200);
+            const newArr = [...feedbackArr];
+            newArr[idx] = { ...feedback, copied: true, like: false, dislike: false };
+            setFeedbackArr(newArr);
+            setTimeout(() => {
+              const resetArr = [...feedbackArr];
+              resetArr[idx] = { ...feedback, copied: false };
+              setFeedbackArr(resetArr);
+            }, 1200);
+          };
+          // Like/Dislike handlers
+          const handleLike = (idx) => {
+            const newArr = [...feedbackArr];
+            newArr[idx] = { like: !(feedback.like), dislike: false, copied: false };
+            setFeedbackArr(newArr);
+          };
+          const handleDislike = (idx) => {
+            const newArr = [...feedbackArr];
+            newArr[idx] = { like: false, dislike: !(feedback.dislike), copied: false };
+            setFeedbackArr(newArr);
+          };
+          // Hover handlers
+          const setHoveredIdx = (idx, val) => {
+            const newArr = [...hoveredArr];
+            newArr[idx] = val;
+            setHoveredArr(newArr);
           };
           return (
             <div
@@ -405,9 +431,9 @@ export default function AgentComponent() {
                     {/* Like icon */}
                     <span
                       style={{ width: "19px", height: "19px", display: "inline-flex", alignItems: "center", justifyContent: "center", marginRight: "8px", cursor: "pointer", position: "relative" }}
-                      onClick={() => setFeedback({ like: !feedback.like, dislike: false, copied: false })}
-                      onMouseEnter={() => setHovered("like")}
-                      onMouseLeave={() => setHovered("")}
+                      onClick={() => handleLike(index)}
+                      onMouseEnter={() => setHoveredIdx(index, "like")}
+                      onMouseLeave={() => setHoveredIdx(index, "")}
                     >
                       {feedback.like ? (
                         <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
@@ -464,9 +490,9 @@ export default function AgentComponent() {
                     {/* Dislike icon */}
                     <span
                       style={{ width: "19px", height: "19px", display: "inline-flex", alignItems: "center", justifyContent: "center", marginRight: "8px", cursor: "pointer", position: "relative" }}
-                      onClick={() => setFeedback({ like: false, dislike: !feedback.dislike, copied: false })}
-                      onMouseEnter={() => setHovered("dislike")}
-                      onMouseLeave={() => setHovered("")}
+                      onClick={() => handleDislike(index)}
+                      onMouseEnter={() => setHoveredIdx(index, "dislike")}
+                      onMouseLeave={() => setHoveredIdx(index, "")}
                     >
                       {feedback.dislike ? (
                         <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
@@ -523,9 +549,9 @@ export default function AgentComponent() {
                     {/* Copy icon */}
                     <span
                       style={{ width: "19px", height: "19px", display: "inline-flex", alignItems: "center", justifyContent: "center", cursor: "pointer", position: "relative" }}
-                      onClick={() => handleCopy(msg.content)}
-                      onMouseEnter={() => setHovered("copy")}
-                      onMouseLeave={() => setHovered("")}
+                      onClick={() => handleCopy(msg.content, index)}
+                      onMouseEnter={() => setHoveredIdx(index, "copy")}
+                      onMouseLeave={() => setHoveredIdx(index, "")}
                     >
                       {feedback.copied ? (
                         <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">

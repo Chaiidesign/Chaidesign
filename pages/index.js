@@ -128,6 +128,24 @@ export default function AgentComponent() {
     setUserId(getUserId());
   }, []);
 
+  // Keep feedbackArr and hoveredArr in sync with conversation length
+  useEffect(() => {
+    if (feedbackArr.length !== conversation.length) {
+      setFeedbackArr((prev) => {
+        const arr = [...prev];
+        while (arr.length < conversation.length) arr.push({ like: false, dislike: false, copied: false });
+        return arr.slice(0, conversation.length);
+      });
+    }
+    if (hoveredArr.length !== conversation.length) {
+      setHoveredArr((prev) => {
+        const arr = [...prev];
+        while (arr.length < conversation.length) arr.push("");
+        return arr.slice(0, conversation.length);
+      });
+    }
+  }, [conversation.length]);
+
   /**
    * Scrolls the chat container to the bottom to ensure the latest message is visible.
    */
@@ -335,6 +353,46 @@ export default function AgentComponent() {
     setHoveredIndex(null);
   };
 
+  // Copy handler
+  const handleCopy = (text, idx) => {
+    navigator.clipboard.writeText(text);
+    setFeedbackArr((prev) => {
+      const arr = [...prev];
+      arr[idx] = { ...arr[idx], copied: true, like: false, dislike: false };
+      return arr;
+    });
+    setTimeout(() => {
+      setFeedbackArr((prev) => {
+        const arr = [...prev];
+        arr[idx] = { ...arr[idx], copied: false };
+        return arr;
+      });
+    }, 1200);
+  };
+  // Like/Dislike handlers
+  const handleLike = (idx) => {
+    setFeedbackArr((prev) => {
+      const arr = [...prev];
+      arr[idx] = { like: !arr[idx].like, dislike: false, copied: false };
+      return arr;
+    });
+  };
+  const handleDislike = (idx) => {
+    setFeedbackArr((prev) => {
+      const arr = [...prev];
+      arr[idx] = { like: false, dislike: !arr[idx].dislike, copied: false };
+      return arr;
+    });
+  };
+  // Hover handlers
+  const setHoveredIdx = (idx, val) => {
+    setHoveredArr((prev) => {
+      const arr = [...prev];
+      arr[idx] = val;
+      return arr;
+    });
+  };
+
   return (
     <div
       style={{
@@ -372,35 +430,6 @@ export default function AgentComponent() {
         {conversation.map((msg, index) => {
           const feedback = feedbackArr[index] || { like: false, dislike: false, copied: false };
           const hovered = hoveredArr[index] || "";
-          // Copy handler
-          const handleCopy = (text, idx) => {
-            navigator.clipboard.writeText(text);
-            const newArr = [...feedbackArr];
-            newArr[idx] = { ...feedback, copied: true, like: false, dislike: false };
-            setFeedbackArr(newArr);
-            setTimeout(() => {
-              const resetArr = [...feedbackArr];
-              resetArr[idx] = { ...feedback, copied: false };
-              setFeedbackArr(resetArr);
-            }, 1200);
-          };
-          // Like/Dislike handlers
-          const handleLike = (idx) => {
-            const newArr = [...feedbackArr];
-            newArr[idx] = { like: !(feedback.like), dislike: false, copied: false };
-            setFeedbackArr(newArr);
-          };
-          const handleDislike = (idx) => {
-            const newArr = [...feedbackArr];
-            newArr[idx] = { like: false, dislike: !(feedback.dislike), copied: false };
-            setFeedbackArr(newArr);
-          };
-          // Hover handlers
-          const setHoveredIdx = (idx, val) => {
-            const newArr = [...hoveredArr];
-            newArr[idx] = val;
-            setHoveredArr(newArr);
-          };
           return (
             <div
               key={index}

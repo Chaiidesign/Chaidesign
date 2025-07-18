@@ -252,15 +252,22 @@ export default function AgentComponent() {
    */
   const bubbleStyles = {
     user: {
-      alignSelf: "flex-end",
-      backgroundColor: "#DCF8C6",
+      display: "inline-flex",
+      padding: "19px 13px",
+      justifyContent: "center",
+      alignItems: "center",
+      gap: "10px",
+      borderRadius: "13px",
+      background: "#F7F7F7",
       color: "#000",
-      padding: "10px",
-      borderRadius: "10px 0 0 10px",
-      borderRight: "5px solid #8EDB5A",
-      margin: "0",
+      fontFamily: 'Acumin Pro, Arial, sans-serif',
+      fontSize: "14px",
+      fontStyle: "normal",
+      fontWeight: 400,
+      lineHeight: "normal",
+      alignSelf: "flex-end",
+      margin: 0,
       maxWidth: "80%",
-      fontSize: "12px",
     },
     agent: {
       alignSelf: "flex-start",
@@ -463,6 +470,7 @@ export default function AgentComponent() {
             alignSelf: "stretch",
             width: "100%",
             boxSizing: "border-box",
+            marginTop: "5px", // Add 5px gap from the info stack above
           }}
         >
           {/* Chat input form for the user to send messages */}

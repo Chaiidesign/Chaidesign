@@ -466,7 +466,8 @@ export default function AgentComponent() {
                         position: "absolute",
                         left: 5,
                         bottom: 5,
-                        background: "none"
+                        background: "none",
+                        marginTop: "2px"
                       }}
                     >
                       {/* Like icon */}
@@ -913,7 +914,7 @@ export default function AgentComponent() {
               justifyContent: "center",
               alignItems: "center",
               gap: "9px",
-              marginTop: "8px",
+              marginTop: "3px",
             }}
           >
             {/* BETA badge */}

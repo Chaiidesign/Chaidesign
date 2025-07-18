@@ -455,7 +455,7 @@ export default function AgentComponent() {
           style={{
             display: "flex",
             minWidth: "400px",
-            maxWidth: "754px",
+            maxWidth: "730px",
             flexDirection: "column",
             justifyContent: "flex-end",
             alignItems: "center",
@@ -465,9 +465,8 @@ export default function AgentComponent() {
             boxSizing: "border-box",
           }}
         >
-          {/* The chat input form and info stack remain unchanged below this wrapper */}
           {/* Chat input form for the user to send messages */}
-          <form onSubmit={handleSubmit} style={{ border: "none", background: "none", padding: 0, margin: 0 }}>
+          <form onSubmit={handleSubmit} style={{ border: "none", background: "none", padding: 0, margin: 0, width: "100%" }}>
             <div
               className="chat-input-container"
               style={{
@@ -478,7 +477,7 @@ export default function AgentComponent() {
                 alignItems: "flex-start",
                 gap: "8px",
                 alignSelf: "stretch",
-                maxWidth: "754px",
+                maxWidth: "730px",
                 width: "100%",
                 boxSizing: "border-box",
                 borderRadius: "16px",

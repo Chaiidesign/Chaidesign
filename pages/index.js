@@ -452,7 +452,8 @@ export default function AgentComponent() {
                       fontWeight: 400,
                       lineHeight: "normal",
                       wordBreak: "break-word",
-                      marginLeft: "40px"
+                      marginLeft: "40px",
+                      paddingBottom: "5px"
                     }}>
                       <ReactMarkdown>{msg.content}</ReactMarkdown>
                     </span>

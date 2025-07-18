@@ -278,7 +278,7 @@ export default function AgentComponent() {
       alignItems: "center",
       gap: "10px",
       borderRadius: "13px",
-      background: "#F7F7F7",
+      background: "none",
       color: "#000",
       fontFamily: 'Acumin Pro, Arial, sans-serif',
       fontSize: "14px",
@@ -287,7 +287,8 @@ export default function AgentComponent() {
       lineHeight: "normal",
       alignSelf: "flex-start",
       margin: 0,
-      maxWidth: "80%",
+      width: "731px",
+      maxWidth: "731px",
       position: "relative",
     },
   };
@@ -360,76 +361,233 @@ export default function AgentComponent() {
           width: "100%",
         }}
       >
-        {conversation.map((msg, index) => (
-          <div
-            key={index}
-            style={msg.role === "user" ? bubbleStyles.user : bubbleStyles.agent}
-          >
-            {msg.role === "agent" ? (
-              <div style={{ position: "relative", width: "100%" }}>
-                <span style={{
-                  color: "#000",
-                  fontFamily: 'Acumin Pro, Arial, sans-serif',
-                  fontSize: "14px",
-                  fontStyle: "normal",
-                  fontWeight: 400,
-                  lineHeight: "normal",
-                  wordBreak: "break-word"
-                }}>
-                  <ReactMarkdown>{msg.content}</ReactMarkdown>
-                </span>
-                {/* Feedback stack */}
-                <span style={{
-                  display: "inline-flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  gap: "-8px",
-                  position: "absolute",
-                  right: 5,
-                  bottom: 5,
-                  background: "none"
-                }}>
-                  {/* Like icon */}
-                  <span style={{ width: "12.56px", height: "12.56px", display: "inline-flex", alignItems: "center", justifyContent: "center", marginRight: "8px" }}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                      <mask id="mask0_141_520" style={{ maskType: 'alpha' }} maskUnits="userSpaceOnUse" x="0" y="0" width="14" height="14">
-                        <rect x="0.719971" y="0.719971" width="12.56" height="12.56" fill="#D9D9D9"/>
-                      </mask>
-                      <g mask="url(#mask0_141_520)">
-                        <path d="M10.1399 11.71H4.38327V4.90662L8.0466 1.24329L8.70077 1.89745C8.76182 1.95851 8.81198 2.04137 8.85123 2.14604C8.89048 2.2507 8.9101 2.35101 8.9101 2.44695V2.63012L8.33444 4.90662H11.7099C11.989 4.90662 12.2333 5.01129 12.4426 5.22062C12.6519 5.42995 12.7566 5.67418 12.7566 5.95329V6.99995C12.7566 7.06101 12.7479 7.12643 12.7304 7.1962C12.713 7.26598 12.6955 7.3314 12.6781 7.39245L11.1081 11.082C11.0296 11.2564 10.8988 11.4047 10.7156 11.5268C10.5324 11.6489 10.3405 11.71 10.1399 11.71ZM5.42994 10.6633H10.1399L11.7099 6.99995V5.95329H6.99994L7.70644 3.07495L5.42994 5.35145V10.6633ZM4.38327 4.90662V5.95329H2.81327V10.6633H4.38327V11.71H1.7666V4.90662H4.38327Z" fill="#1C1B1F"/>
-                      </g>
-                    </svg>
+        {conversation.map((msg, index) => {
+          // Feedback state per message
+          const [feedback, setFeedback] = useState({ like: false, dislike: false, copied: false });
+          const [hovered, setHovered] = useState("");
+          // Copy handler
+          const handleCopy = (text) => {
+            navigator.clipboard.writeText(text);
+            setFeedback({ ...feedback, copied: true });
+            setTimeout(() => setFeedback({ ...feedback, copied: false }), 1200);
+          };
+          return (
+            <div
+              key={index}
+              style={msg.role === "user" ? bubbleStyles.user : bubbleStyles.agent}
+            >
+              {msg.role === "agent" ? (
+                <div style={{ position: "relative", width: "100%" }}>
+                  <span style={{
+                    color: "#000",
+                    fontFamily: 'Acumin Pro, Arial, sans-serif',
+                    fontSize: "14px",
+                    fontStyle: "normal",
+                    fontWeight: 400,
+                    lineHeight: "normal",
+                    wordBreak: "break-word"
+                  }}>
+                    <ReactMarkdown>{msg.content}</ReactMarkdown>
                   </span>
-                  {/* Dislike icon */}
-                  <span style={{ width: "12.56px", height: "12.56px", display: "inline-flex", alignItems: "center", justifyContent: "center", marginRight: "8px" }}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                      <mask id="mask0_141_534" style={{ maskType: 'alpha' }} maskUnits="userSpaceOnUse" x="0" y="0" width="14" height="14">
-                        <rect x="0.719971" y="0.719971" width="12.56" height="12.56" fill="#D9D9D9"/>
-                      </mask>
-                      <g mask="url(#mask0_141_534)">
-                        <path d="M3.85995 2.28992H9.61662V9.09325L5.95329 12.7566L5.29912 12.1024C5.23806 12.0414 5.18791 11.9585 5.14866 11.8538C5.10941 11.7492 5.08979 11.6489 5.08979 11.5529V11.3698L5.66545 9.09325H2.28995C2.01084 9.09325 1.76662 8.98858 1.55729 8.77925C1.34795 8.56992 1.24329 8.3257 1.24329 8.04658V6.99992C1.24329 6.93886 1.25201 6.87345 1.26945 6.80367C1.2869 6.73389 1.30434 6.66847 1.32179 6.60742L2.89179 2.91792C2.97029 2.74347 3.10112 2.59519 3.28429 2.47308C3.46745 2.35097 3.65934 2.28992 3.85995 2.28992ZM8.56995 3.33658H3.85995L2.28995 6.99992V8.04658H6.99995L6.29345 10.9249L8.56995 8.64842V3.33658ZM9.61662 9.09325V8.04658H11.1866V3.33658H9.61662V2.28992H12.2333V9.09325H9.61662Z" fill="#1C1B1F"/>
-                      </g>
-                    </svg>
+                  {/* Feedback stack */}
+                  <span
+                    style={{
+                      display: "inline-flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      gap: "-8px",
+                      position: "absolute",
+                      right: 5,
+                      bottom: 5,
+                      background: "none"
+                    }}
+                  >
+                    {/* Like icon */}
+                    <span
+                      style={{ width: "19px", height: "19px", display: "inline-flex", alignItems: "center", justifyContent: "center", marginRight: "8px", cursor: "pointer", position: "relative" }}
+                      onClick={() => setFeedback({ like: !feedback.like, dislike: false, copied: false })}
+                      onMouseEnter={() => setHovered("like")}
+                      onMouseLeave={() => setHovered("")}
+                    >
+                      {feedback.like ? (
+                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
+                          <mask id="mask0_147_602" style={{ maskType: 'alpha' }} maskUnits="userSpaceOnUse" x="0" y="0" width="19" height="19">
+                            <rect x="0.23938" y="0.23938" width="18.2859" height="18.2859" fill="#D9D9D9"/>
+                          </mask>
+                          <g mask="url(#mask0_147_602)">
+                            <path d="M13.9538 16.2396H6.33465V6.33473L11.668 1.00134L12.6204 1.95373C12.7093 2.04262 12.7823 2.16326 12.8395 2.31564C12.8966 2.46802 12.9252 2.61406 12.9252 2.75374V3.02041L12.0871 6.33473H16.2395C16.6459 6.33473 17.0014 6.48711 17.3062 6.79187C17.6109 7.09664 17.7633 7.4522 17.7633 7.85855V9.38237C17.7633 9.47126 17.7538 9.5665 17.7348 9.66809C17.7157 9.76968 17.6871 9.86492 17.649 9.95381L15.3633 15.3253C15.249 15.5793 15.0585 15.7951 14.7919 15.9729C14.5252 16.1507 14.2458 16.2396 13.9538 16.2396ZM4.81083 6.33473V16.2396H1.76318V6.33473H4.81083Z" fill="#1C1B1F"/>
+                          </g>
+                        </svg>
+                      ) : (
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                          <mask id="mask0_141_520" style={{ maskType: 'alpha' }} maskUnits="userSpaceOnUse" x="0" y="0" width="14" height="14">
+                            <rect x="0.719971" y="0.719971" width="12.56" height="12.56" fill="#D9D9D9"/>
+                          </mask>
+                          <g mask="url(#mask0_141_520)">
+                            <path d="M10.1399 11.71H4.38327V4.90662L8.0466 1.24329L8.70077 1.89745C8.76182 1.95851 8.81198 2.04137 8.85123 2.14604C8.89048 2.2507 8.9101 2.35101 8.9101 2.44695V2.63012L8.33444 4.90662H11.7099C11.989 4.90662 12.2333 5.01129 12.4426 5.22062C12.6519 5.42995 12.7566 5.67418 12.7566 5.95329V6.99995C12.7566 7.06101 12.7479 7.12643 12.7304 7.1962C12.713 7.26598 12.6955 7.3314 12.6781 7.39245L11.1081 11.082C11.0296 11.2564 10.8988 11.4047 10.7156 11.5268C10.5324 11.6489 10.3405 11.71 10.1399 11.71ZM5.42994 10.6633H10.1399L11.7099 6.99995V5.95329H6.99994L7.70644 3.07495L5.42994 5.35145V10.6633ZM4.38327 4.90662V5.95329H2.81327V10.6633H4.38327V11.71H1.7666V4.90662H4.38327Z" fill="#1C1B1F"/>
+                          </g>
+                        </svg>
+                      )}
+                      {/* Like label on hover */}
+                      {hovered === "like" && (
+                        <span style={{
+                          display: "flex",
+                          width: "33px",
+                          height: "14.143px",
+                          padding: "3.367px",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          gap: "6.735px",
+                          flexShrink: 0,
+                          borderRadius: "14.143px",
+                          background: "#D9D9D9",
+                          position: "absolute",
+                          top: "22px",
+                          left: "50%",
+                          transform: "translateX(-50%)",
+                        }}>
+                          <span style={{
+                            width: "27px",
+                            height: "9px",
+                            flexShrink: 0,
+                            color: "#424242",
+                            textAlign: "center",
+                            fontFamily: 'Acumin Pro, Arial, sans-serif',
+                            fontSize: "8.082px",
+                            fontStyle: "normal",
+                            fontWeight: 700,
+                            lineHeight: "normal",
+                          }}>Like</span>
+                        </span>
+                      )}
+                    </span>
+                    {/* Dislike icon */}
+                    <span
+                      style={{ width: "19px", height: "19px", display: "inline-flex", alignItems: "center", justifyContent: "center", marginRight: "8px", cursor: "pointer", position: "relative" }}
+                      onClick={() => setFeedback({ like: false, dislike: !feedback.dislike, copied: false })}
+                      onMouseEnter={() => setHovered("dislike")}
+                      onMouseLeave={() => setHovered("")}
+                    >
+                      {feedback.dislike ? (
+                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
+                          <mask id="mask0_147_613" style={{ maskType: 'alpha' }} maskUnits="userSpaceOnUse" x="0" y="0" width="19" height="19">
+                            <rect x="0.357056" y="0.23938" width="18.2859" height="18.2859" fill="#D9D9D9"/>
+                          </mask>
+                          <g mask="url(#mask0_147_613)">
+                            <path d="M4.92858 2.52515H12.5477V12.43L7.21431 17.7634L6.26192 16.811C6.17303 16.7221 6.10002 16.6015 6.04287 16.4491C5.98573 16.2967 5.95716 16.1507 5.95716 16.011V15.7443L6.79526 12.43H2.64284C2.23649 12.43 1.88093 12.2776 1.57617 11.9729C1.2714 11.6681 1.11902 11.3125 1.11902 10.9062V9.38235C1.11902 9.29346 1.12854 9.19822 1.14759 9.09664C1.16664 8.99505 1.19521 8.89981 1.23331 8.81092L3.51904 3.43944C3.63333 3.18547 3.82381 2.9696 4.09047 2.79182C4.35714 2.61404 4.63651 2.52515 4.92858 2.52515ZM14.0715 12.43V2.52515H17.1192V12.43H14.0715Z" fill="#1C1B1F"/>
+                          </g>
+                        </svg>
+                      ) : (
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                          <mask id="mask0_141_534" style={{ maskType: 'alpha' }} maskUnits="userSpaceOnUse" x="0" y="0" width="14" height="14">
+                            <rect x="0.719971" y="0.719971" width="12.56" height="12.56" fill="#D9D9D9"/>
+                          </mask>
+                          <g mask="url(#mask0_141_534)">
+                            <path d="M3.85995 2.28992H9.61662V9.09325L5.95329 12.7566L5.29912 12.1024C5.23806 12.0414 5.18791 11.9585 5.14866 11.8538C5.10941 11.7492 5.08979 11.6489 5.08979 11.5529V11.3698L5.66545 9.09325H2.28995C2.01084 9.09325 1.76662 8.98858 1.55729 8.77925C1.34795 8.56992 1.24329 8.3257 1.24329 8.04658V6.99992C1.24329 6.93886 1.25201 6.87345 1.26945 6.80367C1.2869 6.73389 1.30434 6.66847 1.32179 6.60742L2.89179 2.91792C2.97029 2.74347 3.10112 2.59519 3.28429 2.47308C3.46745 2.35097 3.65934 2.28992 3.85995 2.28992ZM8.56995 3.33658H3.85995L2.28995 6.99992V8.04658H6.99995L6.29345 10.9249L8.56995 8.64842V3.33658ZM9.61662 9.09325V8.04658H11.1866V3.33658H9.61662V2.28992H12.2333V9.09325H9.61662Z" fill="#1C1B1F"/>
+                          </g>
+                        </svg>
+                      )}
+                      {/* Dislike label on hover */}
+                      {hovered === "dislike" && (
+                        <span style={{
+                          display: "flex",
+                          width: "33px",
+                          height: "14.143px",
+                          padding: "3.367px",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          gap: "6.735px",
+                          flexShrink: 0,
+                          borderRadius: "14.143px",
+                          background: "#D9D9D9",
+                          position: "absolute",
+                          top: "22px",
+                          left: "50%",
+                          transform: "translateX(-50%)",
+                        }}>
+                          <span style={{
+                            width: "27px",
+                            height: "9px",
+                            flexShrink: 0,
+                            color: "#424242",
+                            textAlign: "center",
+                            fontFamily: 'Acumin Pro, Arial, sans-serif',
+                            fontSize: "8.082px",
+                            fontStyle: "normal",
+                            fontWeight: 700,
+                            lineHeight: "normal",
+                          }}>Dislike</span>
+                        </span>
+                      )}
+                    </span>
+                    {/* Copy icon */}
+                    <span
+                      style={{ width: "19px", height: "19px", display: "inline-flex", alignItems: "center", justifyContent: "center", cursor: "pointer", position: "relative" }}
+                      onClick={() => handleCopy(msg.content)}
+                      onMouseEnter={() => setHovered("copy")}
+                      onMouseLeave={() => setHovered("")}
+                    >
+                      {feedback.copied ? (
+                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
+                          <mask id="mask0_147_624" style={{ maskType: 'alpha' }} maskUnits="userSpaceOnUse" x="0" y="0" width="19" height="19">
+                            <rect x="0.474731" y="0.23938" width="18.2859" height="18.2859" fill="#D9D9D9"/>
+                          </mask>
+                          <g mask="url(#mask0_147_624)">
+                            <path d="M7.33197 13.9538C6.91292 13.9538 6.55418 13.8046 6.25577 13.5062C5.95735 13.2077 5.80815 12.849 5.80815 12.4299V3.28701C5.80815 2.86796 5.95735 2.50922 6.25577 2.21081C6.55418 1.91239 6.91292 1.76318 7.33197 1.76318H14.1892C14.6082 1.76318 14.967 1.91239 15.2654 2.21081C15.5638 2.50922 15.713 2.86796 15.713 3.28701V12.4299C15.713 12.849 15.5638 13.2077 15.2654 13.5062C14.967 13.8046 14.6082 13.9538 14.1892 13.9538H7.33197ZM4.28432 17.0014C3.86527 17.0014 3.50654 16.8522 3.20812 16.5538C2.90971 16.2554 2.7605 15.8966 2.7605 15.4776V4.81083H4.28432V15.4776H12.6654V17.0014H4.28432Z" fill="#1C1B1F"/>
+                          </g>
+                        </svg>
+                      ) : (
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                          <mask id="mask0_141_505" style={{ maskType: 'alpha' }} maskUnits="userSpaceOnUse" x="0" y="0" width="14" height="14">
+                            <rect x="0.719971" y="0.719971" width="12.56" height="12.56" fill="#D9D9D9"/>
+                          </mask>
+                          <g mask="url(#mask0_141_505)">
+                            <path d="M5.42992 10.1399C5.14208 10.1399 4.89568 10.0374 4.69071 9.83248C4.48574 9.62751 4.38325 9.3811 4.38325 9.09327V2.81327C4.38325 2.52543 4.48574 2.27903 4.69071 2.07406C4.89568 1.86909 5.14208 1.7666 5.42992 1.7666H10.1399C10.4277 1.7666 10.6742 1.86909 10.8791 2.07406C11.0841 2.27903 11.1866 2.52543 11.1866 2.81327V9.09327C11.1866 9.3811 11.0841 9.62751 10.8791 9.83248C10.6742 10.0374 10.4277 10.1399 10.1399 10.1399H5.42992ZM5.42992 9.09327H10.1399V2.81327H5.42992V9.09327ZM3.33658 12.2333C3.04875 12.2333 2.80235 12.1308 2.59738 11.9258C2.3924 11.7208 2.28992 11.4744 2.28992 11.1866V3.85994H3.33658V11.1866H9.09325V12.2333H3.33658Z" fill="#1C1B1F"/>
+                          </g>
+                        </svg>
+                      )}
+                      {/* Copy label on hover */}
+                      {hovered === "copy" && (
+                        <span style={{
+                          display: "flex",
+                          width: "33px",
+                          height: "14.143px",
+                          padding: "3.367px",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          gap: "6.735px",
+                          flexShrink: 0,
+                          borderRadius: "14.143px",
+                          background: "#D9D9D9",
+                          position: "absolute",
+                          top: "22px",
+                          left: "50%",
+                          transform: "translateX(-50%)",
+                        }}>
+                          <span style={{
+                            width: "27px",
+                            height: "9px",
+                            flexShrink: 0,
+                            color: "#424242",
+                            textAlign: "center",
+                            fontFamily: 'Acumin Pro, Arial, sans-serif',
+                            fontSize: "8.082px",
+                            fontStyle: "normal",
+                            fontWeight: 700,
+                            lineHeight: "normal",
+                          }}>Copy</span>
+                        </span>
+                      )}
+                    </span>
                   </span>
-                  {/* Copy icon */}
-                  <span style={{ width: "12.56px", height: "12.56px", display: "inline-flex", alignItems: "center", justifyContent: "center" }}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                      <mask id="mask0_141_505" style={{ maskType: 'alpha' }} maskUnits="userSpaceOnUse" x="0" y="0" width="14" height="14">
-                        <rect x="0.719971" y="0.719971" width="12.56" height="12.56" fill="#D9D9D9"/>
-                      </mask>
-                      <g mask="url(#mask0_141_505)">
-                        <path d="M5.42992 10.1399C5.14208 10.1399 4.89568 10.0374 4.69071 9.83248C4.48574 9.62751 4.38325 9.3811 4.38325 9.09327V2.81327C4.38325 2.52543 4.48574 2.27903 4.69071 2.07406C4.89568 1.86909 5.14208 1.7666 5.42992 1.7666H10.1399C10.4277 1.7666 10.6742 1.86909 10.8791 2.07406C11.0841 2.27903 11.1866 2.52543 11.1866 2.81327V9.09327C11.1866 9.3811 11.0841 9.62751 10.8791 9.83248C10.6742 10.0374 10.4277 10.1399 10.1399 10.1399H5.42992ZM5.42992 9.09327H10.1399V2.81327H5.42992V9.09327ZM3.33658 12.2333C3.04875 12.2333 2.80235 12.1308 2.59738 11.9258C2.3924 11.7208 2.28992 11.4744 2.28992 11.1866V3.85994H3.33658V11.1866H9.09325V12.2333H3.33658Z" fill="#1C1B1F"/>
-                      </g>
-                    </svg>
-                  </span>
-                </span>
-              </div>
-            ) : (
-              // Display user messages as plain text.
-              msg.content
-            )}
+                </div>
+              ) : (
+                // Display user messages as plain text.
+                msg.content
+              )}
           </div>
-        ))}
+        );
+      })}
         {/* Dummy element to ensure the latest message is scrolled into view */}
         <div ref={messagesEndRef} />
       </div>

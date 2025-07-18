@@ -463,7 +463,7 @@ export default function AgentComponent() {
                         alignItems: "center",
                         gap: "-8px",
                         position: "absolute",
-                        right: 5,
+                        left: 5,
                         bottom: 5,
                         background: "none"
                       }}
@@ -722,9 +722,8 @@ export default function AgentComponent() {
                   flexShrink: 0,
                   borderRadius: "46px",
                   border: "1px solid #000",
-                  background: "rgba(128, 128, 128, 0.30)",
-                  backgroundBlendMode: "luminosity",
-                  backdropFilter: "blur(50px)",
+                  background: "rgba(255,255,255,0.7)",
+                  backdropFilter: "blur(12px)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",

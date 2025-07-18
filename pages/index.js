@@ -115,6 +115,8 @@ export default function AgentComponent() {
   // Add state for input placeholder
   const defaultPlaceholder = "Go! ahead..type something";
   const [inputPlaceholder, setInputPlaceholder] = useState(defaultPlaceholder);
+  // Track if user is hovering a suggestion and the previous input value
+  const [prevInput, setPrevInput] = useState("");
 
   // Initialize session ID and user ID on the client side
   useEffect(() => {
@@ -270,15 +272,23 @@ export default function AgentComponent() {
       maxWidth: "80%",
     },
     agent: {
-      alignSelf: "flex-start",
-      backgroundColor: "#fff",
+      display: "inline-flex",
+      padding: "19px 13px",
+      justifyContent: "center",
+      alignItems: "center",
+      gap: "10px",
+      borderRadius: "13px",
+      background: "#F7F7F7",
       color: "#000",
-      padding: "10px",
-      borderRadius: "0 10px 10px 0",
-      borderLeft: "5px solid #aaf",
-      margin: "0",
+      fontFamily: 'Acumin Pro, Arial, sans-serif',
+      fontSize: "14px",
+      fontStyle: "normal",
+      fontWeight: 400,
+      lineHeight: "normal",
+      alignSelf: "flex-start",
+      margin: 0,
       maxWidth: "80%",
-      fontSize: "12px",
+      position: "relative",
     },
   };
 
@@ -341,7 +351,7 @@ export default function AgentComponent() {
           flexDirection: "column",
           gap: "5px",
           marginBottom: "0px",
-          height: chatConfig.maxChatHeight, // Set a fixed height for the chat container
+          height: chatConfig.maxChatHeight ? Math.max(500, parseInt(chatConfig.maxChatHeight)) : 500, // Increase chat view box height
           overflowY: "auto", // Enable vertical scrolling
           border: "none",
           padding: 0,
@@ -356,8 +366,64 @@ export default function AgentComponent() {
             style={msg.role === "user" ? bubbleStyles.user : bubbleStyles.agent}
           >
             {msg.role === "agent" ? (
-              // Render the agent's response as Markdown.
-              <ReactMarkdown>{msg.content}</ReactMarkdown>
+              <div style={{ position: "relative", width: "100%" }}>
+                <span style={{
+                  color: "#000",
+                  fontFamily: 'Acumin Pro, Arial, sans-serif',
+                  fontSize: "14px",
+                  fontStyle: "normal",
+                  fontWeight: 400,
+                  lineHeight: "normal",
+                  wordBreak: "break-word"
+                }}>
+                  <ReactMarkdown>{msg.content}</ReactMarkdown>
+                </span>
+                {/* Feedback stack */}
+                <span style={{
+                  display: "inline-flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: "-8px",
+                  position: "absolute",
+                  right: 5,
+                  bottom: 5,
+                  background: "none"
+                }}>
+                  {/* Like icon */}
+                  <span style={{ width: "12.56px", height: "12.56px", display: "inline-flex", alignItems: "center", justifyContent: "center", marginRight: "8px" }}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                      <mask id="mask0_141_520" style={{ maskType: 'alpha' }} maskUnits="userSpaceOnUse" x="0" y="0" width="14" height="14">
+                        <rect x="0.719971" y="0.719971" width="12.56" height="12.56" fill="#D9D9D9"/>
+                      </mask>
+                      <g mask="url(#mask0_141_520)">
+                        <path d="M10.1399 11.71H4.38327V4.90662L8.0466 1.24329L8.70077 1.89745C8.76182 1.95851 8.81198 2.04137 8.85123 2.14604C8.89048 2.2507 8.9101 2.35101 8.9101 2.44695V2.63012L8.33444 4.90662H11.7099C11.989 4.90662 12.2333 5.01129 12.4426 5.22062C12.6519 5.42995 12.7566 5.67418 12.7566 5.95329V6.99995C12.7566 7.06101 12.7479 7.12643 12.7304 7.1962C12.713 7.26598 12.6955 7.3314 12.6781 7.39245L11.1081 11.082C11.0296 11.2564 10.8988 11.4047 10.7156 11.5268C10.5324 11.6489 10.3405 11.71 10.1399 11.71ZM5.42994 10.6633H10.1399L11.7099 6.99995V5.95329H6.99994L7.70644 3.07495L5.42994 5.35145V10.6633ZM4.38327 4.90662V5.95329H2.81327V10.6633H4.38327V11.71H1.7666V4.90662H4.38327Z" fill="#1C1B1F"/>
+                      </g>
+                    </svg>
+                  </span>
+                  {/* Dislike icon */}
+                  <span style={{ width: "12.56px", height: "12.56px", display: "inline-flex", alignItems: "center", justifyContent: "center", marginRight: "8px" }}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                      <mask id="mask0_141_534" style={{ maskType: 'alpha' }} maskUnits="userSpaceOnUse" x="0" y="0" width="14" height="14">
+                        <rect x="0.719971" y="0.719971" width="12.56" height="12.56" fill="#D9D9D9"/>
+                      </mask>
+                      <g mask="url(#mask0_141_534)">
+                        <path d="M3.85995 2.28992H9.61662V9.09325L5.95329 12.7566L5.29912 12.1024C5.23806 12.0414 5.18791 11.9585 5.14866 11.8538C5.10941 11.7492 5.08979 11.6489 5.08979 11.5529V11.3698L5.66545 9.09325H2.28995C2.01084 9.09325 1.76662 8.98858 1.55729 8.77925C1.34795 8.56992 1.24329 8.3257 1.24329 8.04658V6.99992C1.24329 6.93886 1.25201 6.87345 1.26945 6.80367C1.2869 6.73389 1.30434 6.66847 1.32179 6.60742L2.89179 2.91792C2.97029 2.74347 3.10112 2.59519 3.28429 2.47308C3.46745 2.35097 3.65934 2.28992 3.85995 2.28992ZM8.56995 3.33658H3.85995L2.28995 6.99992V8.04658H6.99995L6.29345 10.9249L8.56995 8.64842V3.33658ZM9.61662 9.09325V8.04658H11.1866V3.33658H9.61662V2.28992H12.2333V9.09325H9.61662Z" fill="#1C1B1F"/>
+                      </g>
+                    </svg>
+                  </span>
+                  {/* Copy icon */}
+                  <span style={{ width: "12.56px", height: "12.56px", display: "inline-flex", alignItems: "center", justifyContent: "center" }}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                      <mask id="mask0_141_505" style={{ maskType: 'alpha' }} maskUnits="userSpaceOnUse" x="0" y="0" width="14" height="14">
+                        <rect x="0.719971" y="0.719971" width="12.56" height="12.56" fill="#D9D9D9"/>
+                      </mask>
+                      <g mask="url(#mask0_141_505)">
+                        <path d="M5.42992 10.1399C5.14208 10.1399 4.89568 10.0374 4.69071 9.83248C4.48574 9.62751 4.38325 9.3811 4.38325 9.09327V2.81327C4.38325 2.52543 4.48574 2.27903 4.69071 2.07406C4.89568 1.86909 5.14208 1.7666 5.42992 1.7666H10.1399C10.4277 1.7666 10.6742 1.86909 10.8791 2.07406C11.0841 2.27903 11.1866 2.52543 11.1866 2.81327V9.09327C11.1866 9.3811 11.0841 9.62751 10.8791 9.83248C10.6742 10.0374 10.4277 10.1399 10.1399 10.1399H5.42992ZM5.42992 9.09327H10.1399V2.81327H5.42992V9.09327ZM3.33658 12.2333C3.04875 12.2333 2.80235 12.1308 2.59738 11.9258C2.3924 11.7208 2.28992 11.4744 2.28992 11.1866V3.85994H3.33658V11.1866H9.09325V12.2333H3.33658Z" fill="#1C1B1F"/>
+                      </g>
+                    </svg>
+                  </span>
+                </span>
+              </div>
             ) : (
               // Display user messages as plain text.
               msg.content
@@ -401,8 +467,13 @@ export default function AgentComponent() {
           {suggestions.map((s, idx) => (
             <div
               key={s.title}
-              onMouseOver={() => setInputPlaceholder(s.message)}
-              onMouseOut={() => setInputPlaceholder(defaultPlaceholder)}
+              onMouseOver={() => {
+                setPrevInput(message);
+                setMessage(s.message);
+              }}
+              onMouseOut={() => {
+                setMessage(prevInput);
+              }}
               onClick={() => setMessage(s.message)}
               style={{
                 display: "flex",

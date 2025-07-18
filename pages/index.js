@@ -458,8 +458,8 @@ export default function AgentComponent() {
                       <ReactMarkdown>{msg.content}</ReactMarkdown>
                     </span>
                     {/* Feedback stack container below text */}
-                    <div style={{ display: "flex", height: "30px", paddingRight: "632px", alignItems: "center", alignSelf: "stretch" }}>
-                      <div style={{ display: "flex", height: "30px", justifyContent: "center", alignItems: "center", gap: "-11.647px" }}>
+                    <div style={{ display: "flex", height: "30px", alignItems: "center", alignSelf: "stretch", justifyContent: "flex-start", marginLeft: "40px" }}>
+                      <div style={{ display: "flex", height: "30px", justifyContent: "flex-start", alignItems: "center", gap: "-11.647px" }}>
                         {/* Like icon */}
                         <span
                           style={{ width: "18.286px", height: "18.286px", aspectRatio: "18.29/18.29", display: "inline-flex", alignItems: "center", justifyContent: "center", marginRight: "8px", cursor: "pointer", position: "relative" }}
@@ -680,6 +680,7 @@ export default function AgentComponent() {
             gridTemplateColumns: "repeat(6, minmax(0, 1fr))",
             width: "100%",
             boxSizing: "border-box",
+            background: "#FFF",
           }}
         >
           {suggestions.map((s, idx) => (

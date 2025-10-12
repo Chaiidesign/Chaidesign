@@ -398,25 +398,27 @@ export default function AgentComponent() {
     <div
       style={{
         display: "flex",
-        width: "744px",
+        width: "785px",
         minWidth: "400px",
-        maxWidth: "744px",
+        maxWidth: "785px",
+        height: "700px",
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
         fontFamily: "Arial, sans-serif",
         background: "none",
         border: "none",
-        margin: "40px auto 0 auto",
+        margin: "0 auto",
         boxShadow: "none",
         borderRadius: 0,
         padding: 0,
+        overflow: "hidden",
       }}
     >
       {/* Top blank stack */}
-      <div style={{ height: "132px", alignSelf: "stretch" }} />
+      <div style={{ height: "60px", alignSelf: "stretch" }} />
       {/* Chat container stack */}
-      <div style={{ height: "480px", alignSelf: "stretch" }}>
+      <div style={{ height: "350px", alignSelf: "stretch" }}>
         {/* Chat conversation container displaying messages in bubbles */}
         <div
           className="chat-container"
@@ -656,25 +658,25 @@ export default function AgentComponent() {
       <div
         style={{
           display: "flex",
-          width: "754px",
-          height: "205px",
+          width: "785px",
+          height: "290px",
           minWidth: "400px",
-          maxWidth: "754px",
+          maxWidth: "785px",
           flexDirection: "column",
           alignItems: "center",
           gap: "5px",
           flexShrink: 0,
-          margin: "0 auto 24px auto",
+          margin: "0 auto",
         }}
       >
         {/* SUGGESTION PILLS GRID */}
         <div
           style={{
             display: "grid",
-            height: "84px",
-            padding: "0px 41.774px 0.441px 41px",
-            rowGap: "62px",
-            columnGap: "62px",
+            height: "70px",
+            padding: "0px 20px 0px 20px",
+            rowGap: "10px",
+            columnGap: "20px",
             alignSelf: "stretch",
             gridTemplateRows: "repeat(1, minmax(0, 1fr))",
             gridTemplateColumns: "repeat(6, minmax(0, 1fr))",
@@ -696,11 +698,11 @@ export default function AgentComponent() {
               onClick={() => setMessage(s.message)}
               style={{
                 display: "flex",
-                width: "59.559px",
-                height: "83.559px",
+                width: "50px",
+                height: "65px",
                 flexDirection: "column",
                 alignItems: "center",
-                gap: "7px",
+                gap: "5px",
                 flexShrink: 0,
                 gridRow: "1 / span 1",
                 gridColumn: `${idx + 1} / span 1`,
@@ -711,10 +713,10 @@ export default function AgentComponent() {
               <div
                 className="suggestion-circle"
                 style={{
-                  width: "59.559px",
-                  height: "59.559px",
+                  width: "50px",
+                  height: "50px",
                   flexShrink: 0,
-                  borderRadius: "46px",
+                  borderRadius: "25px",
                   border: "1px solid #000",
                   background: "rgba(255,255,255,0.7)",
                   backdropFilter: "blur(12px)",
@@ -727,7 +729,7 @@ export default function AgentComponent() {
                 onMouseOut={e => e.currentTarget.style.background = 'rgba(128,128,128,0.30)'}
               >
                 {/* Placeholder for icon */}
-                <div style={{ width: 32, height: 32, borderRadius: "50%", background: "#d3d3d3" }} />
+                <div style={{ width: 24, height: 24, borderRadius: "50%", background: "#d3d3d3" }} />
               </div>
               <div
                 style={{
@@ -755,7 +757,7 @@ export default function AgentComponent() {
             flexDirection: "column",
             justifyContent: "flex-end",
             alignItems: "center",
-            gap: "17px",
+            gap: "10px",
             alignSelf: "stretch",
             width: "100%",
             boxSizing: "border-box",

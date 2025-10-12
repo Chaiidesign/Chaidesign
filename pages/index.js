@@ -669,20 +669,20 @@ export default function AgentComponent() {
           margin: "0 auto",
         }}
       >
-        {/* SUGGESTION PILLS GRID */}
+        {/* SUGGESTION PILLS RESPONSIVE CONTAINER */}
         <div
           style={{
-            display: "grid",
-            height: "70px",
-            padding: "0px 20px 0px 20px",
-            rowGap: "10px",
-            columnGap: "20px",
-            alignSelf: "stretch",
-            gridTemplateRows: "repeat(1, minmax(0, 1fr))",
-            gridTemplateColumns: "repeat(6, minmax(0, 1fr))",
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "8px",
+            padding: "10px 20px",
             width: "100%",
+            maxWidth: "100%",
             boxSizing: "border-box",
             background: "#FFF",
+            overflow: "hidden",
           }}
         >
           {suggestions.map((s, idx) => (
@@ -698,14 +698,14 @@ export default function AgentComponent() {
               onClick={() => setMessage(s.message)}
               style={{
                 display: "flex",
-                width: "50px",
+                width: "calc(16.66% - 6px)",
+                minWidth: "60px",
+                maxWidth: "80px",
                 height: "65px",
                 flexDirection: "column",
                 alignItems: "center",
                 gap: "5px",
-                flexShrink: 0,
-                gridRow: "1 / span 1",
-                gridColumn: `${idx + 1} / span 1`,
+                flexShrink: 1,
                 boxSizing: "border-box",
                 cursor: "pointer",
               }}
@@ -713,10 +713,10 @@ export default function AgentComponent() {
               <div
                 className="suggestion-circle"
                 style={{
-                  width: "50px",
-                  height: "50px",
+                  width: "40px",
+                  height: "40px",
                   flexShrink: 0,
-                  borderRadius: "25px",
+                  borderRadius: "20px",
                   border: "1px solid #000",
                   background: "rgba(255,255,255,0.7)",
                   backdropFilter: "blur(12px)",
@@ -729,18 +729,21 @@ export default function AgentComponent() {
                 onMouseOut={e => e.currentTarget.style.background = 'rgba(128,128,128,0.30)'}
               >
                 {/* Placeholder for icon */}
-                <div style={{ width: 24, height: 24, borderRadius: "50%", background: "#d3d3d3" }} />
+                <div style={{ width: 20, height: 20, borderRadius: "50%", background: "#d3d3d3" }} />
               </div>
               <div
                 style={{
-                  alignSelf: "stretch",
+                  width: "100%",
                   color: "#000",
                   textAlign: "center",
                   fontFamily: 'Acumin Pro, Arial, sans-serif',
-                  fontSize: "14px",
+                  fontSize: "12px",
                   fontStyle: "normal",
                   fontWeight: 400,
                   lineHeight: "normal",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  whiteSpace: "nowrap",
                 }}
               >
                 {s.title}
@@ -964,7 +967,7 @@ export default function AgentComponent() {
         </div>
       </div>
 
-      {/* Define keyframes for the spin animation */}
+      {/* Define keyframes for the spin animation and responsive styles */}
       <style jsx>{`
         .chat-container::-webkit-scrollbar {
           width: 8px; /* Make scrollbar thinner */
@@ -982,6 +985,32 @@ export default function AgentComponent() {
           scrollbar-width: thin;
           scrollbar-color: #ccc transparent;
         }
+        
+        /* Responsive styles for suggestion pills */
+        @media (max-width: 600px) {
+          .suggestion-circle {
+            width: 35px !important;
+            height: 35px !important;
+            border-radius: 17.5px !important;
+          }
+          .suggestion-circle div {
+            width: 16px !important;
+            height: 16px !important;
+          }
+        }
+        
+        @media (max-width: 500px) {
+          .suggestion-circle {
+            width: 30px !important;
+            height: 30px !important;
+            border-radius: 15px !important;
+          }
+          .suggestion-circle div {
+            width: 14px !important;
+            height: 14px !important;
+          }
+        }
+        
         @keyframes spin {
           from {
             transform: rotate(0deg);

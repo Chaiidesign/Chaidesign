@@ -426,11 +426,11 @@ export default function AgentComponent() {
             display: "flex",
             flexDirection: "column",
             gap: "5px",
-            marginBottom: "0px",
+            marginBottom: "5px",
             maxHeight: chatConfig.maxChatHeight ? Math.max(500, parseInt(chatConfig.maxChatHeight)) : 500,
             overflowY: "auto",
             border: "none",
-            padding: 0,
+            padding: "0 0 5px 0",
             borderRadius: 0,
             background: "none",
             width: "100%",
@@ -666,7 +666,7 @@ export default function AgentComponent() {
           alignItems: "center",
           gap: "5px",
           flexShrink: 0,
-          margin: "0 auto",
+          margin: "5px auto 0 auto",
         }}
       >
         {/* SUGGESTION PILLS RESPONSIVE CONTAINER */}
@@ -676,14 +676,15 @@ export default function AgentComponent() {
             flexWrap: "wrap",
             justifyContent: "center",
             alignItems: "center",
-            gap: "6px",
-            padding: "8px 12px",
+            gap: "4px",
+            padding: "6px 12px",
             width: "730px",
             maxWidth: "730px",
             boxSizing: "border-box",
             background: "#FFF",
             overflow: "hidden",
             margin: "0 auto",
+            minHeight: "50px",
           }}
         >
           {suggestions.map((s, idx) => (
@@ -699,13 +700,13 @@ export default function AgentComponent() {
               onClick={() => setMessage(s.message)}
               style={{
                 display: "flex",
-                width: "calc(16.66% - 5px)",
-                minWidth: "50px",
-                maxWidth: "70px",
-                height: "50px",
+                width: "calc(16.66% - 4px)",
+                minWidth: "45px",
+                maxWidth: "60px",
+                height: "40px",
                 flexDirection: "column",
                 alignItems: "center",
-                gap: "3px",
+                gap: "2px",
                 flexShrink: 1,
                 boxSizing: "border-box",
                 cursor: "pointer",
@@ -714,10 +715,10 @@ export default function AgentComponent() {
               <div
                 className="suggestion-circle"
                 style={{
-                  width: "32px",
-                  height: "32px",
+                  width: "24px",
+                  height: "24px",
                   flexShrink: 0,
-                  borderRadius: "16px",
+                  borderRadius: "12px",
                   border: "1px solid #000",
                   background: "rgba(255,255,255,0.7)",
                   backdropFilter: "blur(12px)",
@@ -730,7 +731,7 @@ export default function AgentComponent() {
                 onMouseOut={e => e.currentTarget.style.background = 'rgba(128,128,128,0.30)'}
               >
                 {/* Placeholder for icon */}
-                <div style={{ width: 16, height: 16, borderRadius: "50%", background: "#d3d3d3" }} />
+                <div style={{ width: 12, height: 12, borderRadius: "50%", background: "#d3d3d3" }} />
               </div>
               <div
                 style={{
@@ -738,7 +739,7 @@ export default function AgentComponent() {
                   color: "#000",
                   textAlign: "center",
                   fontFamily: 'Acumin Pro, Arial, sans-serif',
-                  fontSize: "10px",
+                  fontSize: "9px",
                   fontStyle: "normal",
                   fontWeight: 400,
                   lineHeight: "normal",
@@ -987,32 +988,20 @@ export default function AgentComponent() {
           scrollbar-color: #ccc transparent;
         }
         
-        /* Responsive styles for suggestion pills - prevent horizontal scroll */
+        /* Responsive styles for suggestion pills - match image exactly */
         @media (max-width: 800px) {
           .suggestion-circle {
-            width: 28px !important;
-            height: 28px !important;
-            border-radius: 14px !important;
+            width: 22px !important;
+            height: 22px !important;
+            border-radius: 11px !important;
           }
           .suggestion-circle div {
-            width: 14px !important;
-            height: 14px !important;
+            width: 11px !important;
+            height: 11px !important;
           }
         }
         
         @media (max-width: 600px) {
-          .suggestion-circle {
-            width: 24px !important;
-            height: 24px !important;
-            border-radius: 12px !important;
-          }
-          .suggestion-circle div {
-            width: 12px !important;
-            height: 12px !important;
-          }
-        }
-        
-        @media (max-width: 500px) {
           .suggestion-circle {
             width: 20px !important;
             height: 20px !important;
@@ -1021,6 +1010,18 @@ export default function AgentComponent() {
           .suggestion-circle div {
             width: 10px !important;
             height: 10px !important;
+          }
+        }
+        
+        @media (max-width: 500px) {
+          .suggestion-circle {
+            width: 18px !important;
+            height: 18px !important;
+            border-radius: 9px !important;
+          }
+          .suggestion-circle div {
+            width: 9px !important;
+            height: 9px !important;
           }
         }
         

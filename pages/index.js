@@ -669,22 +669,21 @@ export default function AgentComponent() {
           margin: "5px auto 0 auto",
         }}
       >
-        {/* SUGGESTION PILLS RESPONSIVE CONTAINER */}
+        {/* SUGGESTION PILLS GRID - EXACT FIGMA DESIGN */}
         <div
           style={{
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: "4px",
-            padding: "6px 12px",
-            width: "730px",
-            maxWidth: "730px",
+            display: "grid",
+            height: "84px",
+            padding: "0 41px",
+            rowGap: "62px",
+            columnGap: "62px",
+            alignSelf: "stretch",
+            gridTemplateRows: "repeat(1, minmax(0, 1fr))",
+            gridTemplateColumns: "repeat(6, minmax(0, 1fr))",
+            width: "100%",
             boxSizing: "border-box",
             background: "#FFF",
             overflow: "hidden",
-            margin: "0 auto",
-            minHeight: "50px",
           }}
         >
           {suggestions.map((s, idx) => (
@@ -700,16 +699,16 @@ export default function AgentComponent() {
               onClick={() => setMessage(s.message)}
               style={{
                 display: "flex",
-                width: "calc(16.66% - 4px)",
-                minWidth: "45px",
-                maxWidth: "60px",
-                height: "40px",
+                width: "100%",
+                height: "100%",
                 flexDirection: "column",
                 alignItems: "center",
+                justifyContent: "center",
                 gap: "2px",
-                flexShrink: 1,
                 boxSizing: "border-box",
                 cursor: "pointer",
+                gridRow: "1 / span 1",
+                gridColumn: `${idx + 1} / span 1`,
               }}
             >
               <div

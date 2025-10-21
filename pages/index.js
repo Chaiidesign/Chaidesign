@@ -684,6 +684,8 @@ export default function AgentComponent() {
             boxSizing: "border-box",
             background: "#FFF",
             overflow: "hidden",
+            position: "relative",
+            zIndex: 10,
           }}
         >
           {suggestions.map((s, idx) => (
@@ -700,7 +702,7 @@ export default function AgentComponent() {
               style={{
                 display: "flex",
                 width: "100%",
-                height: "100%",
+                height: "59.559px",
                 flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "center",
@@ -709,18 +711,20 @@ export default function AgentComponent() {
                 cursor: "pointer",
                 gridRow: "1 / span 1",
                 gridColumn: `${idx + 1} / span 1`,
+                alignSelf: "stretch",
               }}
             >
               <div
                 className="suggestion-circle"
                 style={{
-                  width: "24px",
-                  height: "24px",
+                  width: "59.559px",
+                  height: "59.559px",
                   flexShrink: 0,
-                  borderRadius: "12px",
-                  border: "1px solid #000",
-                  background: "rgba(255,255,255,0.7)",
-                  backdropFilter: "blur(12px)",
+                  borderRadius: "46px",
+                  border: "1px solid rgba(255, 255, 255, 0.40)",
+                  background: "rgba(128, 128, 128, 0.30)",
+                  backgroundBlendMode: "luminosity",
+                  backdropFilter: "blur(50px)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -730,15 +734,15 @@ export default function AgentComponent() {
                 onMouseOut={e => e.currentTarget.style.background = 'rgba(128,128,128,0.30)'}
               >
                 {/* Placeholder for icon */}
-                <div style={{ width: 12, height: 12, borderRadius: "50%", background: "#d3d3d3" }} />
+                <div style={{ width: 24, height: 24, borderRadius: "50%", background: "#d3d3d3" }} />
               </div>
               <div
                 style={{
                   width: "100%",
                   color: "#000",
                   textAlign: "center",
-                  fontFamily: 'Acumin Pro, Arial, sans-serif',
-                  fontSize: "9px",
+                  fontFamily: "Acumin Pro",
+                  fontSize: "14px",
                   fontStyle: "normal",
                   fontWeight: 400,
                   lineHeight: "normal",

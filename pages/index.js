@@ -681,6 +681,7 @@ export default function AgentComponent() {
             gridTemplateRows: "repeat(1, minmax(0, 1fr))",
             gridTemplateColumns: "repeat(6, minmax(0, 1fr))",
             width: "100%",
+            maxWidth: "100%",
             boxSizing: "border-box",
             background: "#FFF",
             overflow: "hidden",

@@ -424,13 +424,13 @@ export default function AgentComponent() {
       {/* FRAMER: Fixed header space */}
       <div style={{ height: "40px", alignSelf: "stretch", background: "transparent" }} />
       
-      {/* FRAMER: Dynamic chat container - internal responsive */}
+      {/* FRAMER: Static chat container - no jumping */}
       <div style={{ 
-        height: showPills ? "380px" : "520px", 
+        height: "450px", 
         alignSelf: "stretch",
-        transition: "height 0.3s ease-in-out",
         background: "transparent",
-        overflow: "hidden"
+        overflow: "hidden",
+        position: "relative"
       }}>
         {/* Chat conversation container displaying messages in bubbles */}
         <div
@@ -667,20 +667,20 @@ export default function AgentComponent() {
         </div>
       </div>
 
-      {/* FRAMER: Bottom section - internal responsive */}
+      {/* FRAMER: Static bottom section - no jumping */}
       <div
         style={{
           display: "flex",
           width: "100%",
-          height: showPills ? "280px" : "140px",
+          height: "210px",
           flexDirection: "column",
           alignItems: "center",
           gap: "8px",
           flexShrink: 0,
           margin: "0",
-          transition: "height 0.3s ease-in-out",
           background: "transparent",
           padding: "0 20px",
+          position: "relative",
         }}
       >
         {/* SUGGESTION PILLS GRID - HIDE AFTER FIRST INTERACTION */}
@@ -802,7 +802,7 @@ export default function AgentComponent() {
                 gap: "8px",
                 alignSelf: "stretch",
                 maxWidth: "730px",
-                width: "100%",
+                width: "calc(100% - 24px)",
                 boxSizing: "border-box",
                 borderRadius: "16px",
                 border: "0.5px solid rgba(0, 0, 0, 0.10)",

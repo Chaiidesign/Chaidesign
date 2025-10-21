@@ -927,67 +927,71 @@ export default function AgentComponent() {
               </div>
             </div>
           </form>
+        </div>
 
-          {/* BETA MESSAGE - SEPARATE ROW BELOW INPUT */}
+        {/* BETA MESSAGE - COMPLETELY SEPARATE BELOW INPUT CONTAINER */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "9px",
+            marginTop: "8px",
+            width: "100%",
+            position: "absolute",
+            bottom: "-30px",
+            left: "50%",
+            transform: "translateX(-50%)",
+          }}
+        >
+          {/* BETA badge */}
           <div
             style={{
               display: "flex",
+              width: "33px",
+              height: "14.143px",
+              padding: "3.367px",
               justifyContent: "center",
               alignItems: "center",
-              gap: "9px",
-              marginTop: "8px",
-              width: "100%",
+              gap: "6.735px",
+              borderRadius: "14.143px",
+              background: "#D9D9D9",
             }}
           >
-            {/* BETA badge */}
-            <div
+            <span
               style={{
-                display: "flex",
-                width: "33px",
-                height: "14.143px",
-                padding: "3.367px",
-                justifyContent: "center",
-                alignItems: "center",
-                gap: "6.735px",
-                borderRadius: "14.143px",
-                background: "#D9D9D9",
-              }}
-            >
-              <span
-                style={{
-                  width: "27px",
-                  height: "9px",
-                  flexShrink: 0,
-                  color: "#424242",
-                  textAlign: "center",
-                  fontFamily: 'Acumin Pro',
-                  fontSize: "8.082px",
-                  fontStyle: "normal",
-                  fontWeight: 700,
-                  lineHeight: "normal",
-                  letterSpacing: 0,
-                }}
-              >
-                BETA
-              </span>
-            </div>
-            {/* Text holder */}
-            <div
-              style={{
-                width: "186px",
-                height: "11px",
+                width: "27px",
+                height: "9px",
+                flexShrink: 0,
                 color: "#424242",
+                textAlign: "center",
                 fontFamily: 'Acumin Pro',
-                fontSize: "11px",
+                fontSize: "8.082px",
                 fontStyle: "normal",
-                fontWeight: 400,
+                fontWeight: 700,
                 lineHeight: "normal",
-                display: "flex",
-                alignItems: "center",
+                letterSpacing: 0,
               }}
             >
-              Chai.AI may create unexpected results
-            </div>
+              BETA
+            </span>
+          </div>
+          {/* Text holder */}
+          <div
+            style={{
+              width: "186px",
+              height: "11px",
+              color: "#424242",
+              fontFamily: 'Acumin Pro',
+              fontSize: "11px",
+              fontStyle: "normal",
+              fontWeight: 400,
+              lineHeight: "normal",
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            Chai.AI may create unexpected results
           </div>
         </div>
       </div>

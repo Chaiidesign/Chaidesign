@@ -928,14 +928,15 @@ export default function AgentComponent() {
             </div>
           </form>
 
-          {/* Info stack below chat */}
+          {/* BETA MESSAGE - SEPARATE ROW BELOW INPUT */}
           <div
             style={{
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
               gap: "9px",
-              marginTop: "3px",
+              marginTop: "8px",
+              width: "100%",
             }}
           >
             {/* BETA badge */}

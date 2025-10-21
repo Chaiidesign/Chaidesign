@@ -805,7 +805,7 @@ export default function AgentComponent() {
                 gap: "8px",
                 alignSelf: "stretch",
                 maxWidth: "730px",
-                width: "100%",
+                width: "calc(100% - 24px)",
                 boxSizing: "border-box",
                 borderRadius: "16px",
                 border: "0.5px solid rgba(0, 0, 0, 0.10)",

@@ -773,7 +773,7 @@ export default function AgentComponent() {
           ))}
           </div>
         )}
-        {/* INPUT STACK BELOW */}
+        {/* INPUT STACK BELOW - STATIC POSITIONING */}
         <div
           style={{
             display: "flex",
@@ -783,10 +783,13 @@ export default function AgentComponent() {
             justifyContent: "flex-end",
             alignItems: "center",
             gap: "10px",
-            alignSelf: "stretch",
-            width: "100%",
-            boxSizing: "border-box",
-            marginTop: "5px", // Add 5px gap from the info stack above
+            padding: "0 12px",
+            marginTop: "5px",
+            paddingBottom: "5px",
+            position: "absolute",
+            bottom: "0",
+            left: "50%",
+            transform: "translateX(-50%)",
           }}
         >
           {/* Chat input form for the user to send messages */}
@@ -802,7 +805,7 @@ export default function AgentComponent() {
                 gap: "8px",
                 alignSelf: "stretch",
                 maxWidth: "730px",
-                width: "calc(100% - 24px)",
+                width: "100%",
                 boxSizing: "border-box",
                 borderRadius: "16px",
                 border: "0.5px solid rgba(0, 0, 0, 0.10)",

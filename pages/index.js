@@ -777,12 +777,10 @@ export default function AgentComponent() {
         <div
           style={{
             display: "flex",
-            minWidth: "400px",
-            maxWidth: "600px",
-            flexDirection: "column",
+            maxWidth: "754px",
             justifyContent: "flex-end",
             alignItems: "center",
-            gap: "10px",
+            gap: "17px",
             padding: "0 12px",
             marginTop: "5px",
             paddingBottom: "5px",
@@ -804,7 +802,7 @@ export default function AgentComponent() {
                 alignItems: "flex-start",
                 gap: "8px",
                 alignSelf: "stretch",
-                maxWidth: "600px",
+                maxWidth: "754px",
                 width: "calc(100% - 24px)",
                 boxSizing: "border-box",
                 borderRadius: "16px",

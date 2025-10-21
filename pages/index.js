@@ -778,7 +778,7 @@ export default function AgentComponent() {
           style={{
             display: "flex",
             minWidth: "400px",
-            maxWidth: "730px",
+            maxWidth: "600px",
             flexDirection: "column",
             justifyContent: "flex-end",
             alignItems: "center",
@@ -804,7 +804,7 @@ export default function AgentComponent() {
                 alignItems: "flex-start",
                 gap: "8px",
                 alignSelf: "stretch",
-                maxWidth: "730px",
+                maxWidth: "600px",
                 width: "calc(100% - 24px)",
                 boxSizing: "border-box",
                 borderRadius: "16px",

@@ -402,6 +402,7 @@ export default function AgentComponent() {
   // Main render - FRAMER OPTIMIZED FIXED CONTAINER
   return (
     <div
+      className="main-container"
       style={{
         display: "flex",
         width: "785px",
@@ -418,7 +419,7 @@ export default function AgentComponent() {
         padding: "0",
         overflow: "hidden",
         position: "relative",
-        // FRAMER: Fixed container - all responsive behavior handled internally
+        // RESPONSIVE: Three states - Website, Tablet, Mobile
       }}
     >
       {/* FRAMER: Fixed header space */}
@@ -803,7 +804,7 @@ export default function AgentComponent() {
                 gap: "8px",
                 alignSelf: "stretch",
                 maxWidth: "754px",
-                width: "calc(100% - 24px)",
+                width: "100%",
                 boxSizing: "border-box",
                 borderRadius: "16px",
                 border: "0.5px solid rgba(0, 0, 0, 0.10)",
@@ -1009,40 +1010,61 @@ export default function AgentComponent() {
           scrollbar-color: #ccc transparent;
         }
         
-        /* Responsive styles for suggestion pills - match image exactly */
-        @media (max-width: 800px) {
-          .suggestion-circle {
-            width: 22px !important;
-            height: 22px !important;
-            border-radius: 11px !important;
+        /* RESPONSIVE DESIGN - THREE STATES */
+        
+        /* 1. WEBSITE STATE (Desktop) - 1200px and above */
+        @media (min-width: 1200px) {
+          .chat-input-container {
+            width: 754px !important;
+            max-width: 754px !important;
           }
-          .suggestion-circle div {
-            width: 11px !important;
-            height: 11px !important;
+          .main-container {
+            width: 785px !important;
+            height: 700px !important;
           }
         }
         
-        @media (max-width: 600px) {
+        /* 2. TABLET STATE - 768px to 1199px */
+        @media (min-width: 768px) and (max-width: 1199px) {
+          .chat-input-container {
+            width: 90% !important;
+            max-width: 600px !important;
+          }
+          .main-container {
+            width: 90% !important;
+            max-width: 800px !important;
+            height: 600px !important;
+          }
           .suggestion-circle {
-            width: 20px !important;
-            height: 20px !important;
-            border-radius: 10px !important;
+            width: 35px !important;
+            height: 35px !important;
+            border-radius: 17.5px !important;
           }
           .suggestion-circle div {
-            width: 10px !important;
-            height: 10px !important;
-          }
-        }
-        
-        @media (max-width: 500px) {
-          .suggestion-circle {
             width: 18px !important;
             height: 18px !important;
-            border-radius: 9px !important;
+          }
+        }
+        
+        /* 3. MOBILE STATE - Below 768px */
+        @media (max-width: 767px) {
+          .chat-input-container {
+            width: 95% !important;
+            max-width: 400px !important;
+          }
+          .main-container {
+            width: 95% !important;
+            max-width: 450px !important;
+            height: 500px !important;
+          }
+          .suggestion-circle {
+            width: 30px !important;
+            height: 30px !important;
+            border-radius: 15px !important;
           }
           .suggestion-circle div {
-            width: 9px !important;
-            height: 9px !important;
+            width: 15px !important;
+            height: 15px !important;
           }
         }
         

@@ -122,6 +122,9 @@ export default function AgentComponent() {
   const [feedbackArr, setFeedbackArr] = useState([]);
   const [hoveredArr, setHoveredArr] = useState([]);
 
+  // State to control pill visibility - hide after first interaction
+  const [showPills, setShowPills] = useState(true);
+
   // Initialize session ID and user ID on the client side
   useEffect(() => {
     setSessionId(getSessionId());
@@ -197,6 +200,9 @@ export default function AgentComponent() {
 
     // Update the conversation state by adding the user's message.
     setConversation((prev) => [...prev, userMessage]);
+
+    // Hide pills after first interaction for cleaner UX
+    setShowPills(false);
 
     // Prepare the payload for the API call.
     // Note: In production, user_id and session_id should be uniquely generated.
@@ -393,32 +399,39 @@ export default function AgentComponent() {
     });
   };
 
-  // Main render
+  // Main render - FRAMER OPTIMIZED FIXED CONTAINER
   return (
     <div
       style={{
         display: "flex",
         width: "785px",
-        minWidth: "400px",
-        maxWidth: "785px",
         height: "700px",
         flexDirection: "column",
-        justifyContent: "center",
+        justifyContent: "flex-start",
         alignItems: "center",
         fontFamily: "Arial, sans-serif",
-        background: "none",
-        border: "none",
-        margin: "0 auto",
-        boxShadow: "none",
-        borderRadius: 0,
-        padding: 0,
+        background: "#FFFFFF",
+        border: "1px solid #E5E5E5",
+        margin: "0",
+        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+        borderRadius: "12px",
+        padding: "0",
         overflow: "hidden",
+        position: "relative",
+        // FRAMER: Fixed container - all responsive behavior handled internally
       }}
     >
-      {/* Top blank stack */}
-      <div style={{ height: "60px", alignSelf: "stretch" }} />
-      {/* Chat container stack */}
-      <div style={{ height: "350px", alignSelf: "stretch" }}>
+      {/* FRAMER: Fixed header space */}
+      <div style={{ height: "40px", alignSelf: "stretch", background: "transparent" }} />
+      
+      {/* FRAMER: Dynamic chat container - internal responsive */}
+      <div style={{ 
+        height: showPills ? "380px" : "520px", 
+        alignSelf: "stretch",
+        transition: "height 0.3s ease-in-out",
+        background: "transparent",
+        overflow: "hidden"
+      }}>
         {/* Chat conversation container displaying messages in bubbles */}
         <div
           className="chat-container"
@@ -654,41 +667,43 @@ export default function AgentComponent() {
         </div>
       </div>
 
-      {/* OUTERMOST LAYER */}
+      {/* FRAMER: Bottom section - internal responsive */}
       <div
         style={{
           display: "flex",
-          width: "785px",
-          height: "290px",
-          minWidth: "400px",
-          maxWidth: "785px",
+          width: "100%",
+          height: showPills ? "280px" : "140px",
           flexDirection: "column",
           alignItems: "center",
-          gap: "5px",
+          gap: "8px",
           flexShrink: 0,
-          margin: "5px auto 0 auto",
+          margin: "0",
+          transition: "height 0.3s ease-in-out",
+          background: "transparent",
+          padding: "0 20px",
         }}
       >
-        {/* SUGGESTION PILLS GRID - EXACT FIGMA DESIGN */}
-        <div
-          style={{
-            display: "grid",
-            height: "84px",
-            padding: "0 41px",
-            rowGap: "62px",
-            columnGap: "62px",
-            alignSelf: "stretch",
-            gridTemplateRows: "repeat(1, minmax(0, 1fr))",
-            gridTemplateColumns: "repeat(6, minmax(0, 1fr))",
-            width: "100%",
-            maxWidth: "100%",
-            boxSizing: "border-box",
-            background: "#FFF",
-            overflow: "hidden",
-            position: "relative",
-            zIndex: 10,
-          }}
-        >
+        {/* SUGGESTION PILLS GRID - HIDE AFTER FIRST INTERACTION */}
+        {showPills && (
+          <div
+            style={{
+              display: "grid",
+              height: "84px",
+              padding: "0 41px",
+              rowGap: "62px",
+              columnGap: "62px",
+              alignSelf: "stretch",
+              gridTemplateRows: "repeat(1, minmax(0, 1fr))",
+              gridTemplateColumns: "repeat(6, minmax(0, 1fr))",
+              width: "100%",
+              maxWidth: "100%",
+              boxSizing: "border-box",
+              background: "#FFF",
+              overflow: "hidden",
+              position: "relative",
+              zIndex: 10,
+            }}
+          >
           {suggestions.map((s, idx) => (
             <div
               key={s.title}
@@ -756,7 +771,8 @@ export default function AgentComponent() {
               </div>
             </div>
           ))}
-        </div>
+          </div>
+        )}
         {/* INPUT STACK BELOW */}
         <div
           style={{

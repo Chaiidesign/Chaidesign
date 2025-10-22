@@ -408,15 +408,15 @@ export default function AgentComponent() {
         width: "785px",
         height: "700px",
         flexDirection: "column",
-        justifyContent: "flex-start",
+        justifyContent: "center",
         alignItems: "center",
         fontFamily: "Arial, sans-serif",
         background: "#FFFFFF",
         border: "1px solid #E5E5E5",
-        margin: "0",
+        margin: "0 auto",
         boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
         borderRadius: "12px",
-        padding: "0",
+        padding: "20px",
         overflow: "hidden",
         position: "relative",
         // RESPONSIVE: Three states - Website, Tablet, Mobile
@@ -774,21 +774,17 @@ export default function AgentComponent() {
           ))}
           </div>
         )}
-        {/* INPUT STACK BELOW - STATIC POSITIONING */}
+        {/* INPUT STACK BELOW - CENTERED */}
         <div
           style={{
             display: "flex",
             maxWidth: "754px",
-            justifyContent: "flex-end",
+            justifyContent: "center",
             alignItems: "center",
             gap: "17px",
             padding: "0 12px",
-            marginTop: "5px",
-            paddingBottom: "5px",
-            position: "absolute",
-            bottom: "0",
-            left: "50%",
-            transform: "translateX(-50%)",
+            marginTop: "20px",
+            width: "100%",
           }}
         >
           {/* Chat input form for the user to send messages */}
@@ -929,19 +925,15 @@ export default function AgentComponent() {
           </form>
         </div>
 
-        {/* BETA MESSAGE - COMPLETELY SEPARATE BELOW INPUT CONTAINER */}
+        {/* BETA MESSAGE - INSIDE MAIN CONTAINER */}
         <div
           style={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
             gap: "9px",
-            marginTop: "8px",
+            marginTop: "12px",
             width: "100%",
-            position: "absolute",
-            bottom: "-30px",
-            left: "50%",
-            transform: "translateX(-50%)",
           }}
         >
           {/* BETA badge */}

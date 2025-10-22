@@ -408,7 +408,7 @@ export default function AgentComponent() {
         width: "785px",
         height: "700px",
         flexDirection: "column",
-        justifyContent: "center",
+        justifyContent: "flex-start",
         alignItems: "center",
         fontFamily: "Arial, sans-serif",
         background: "#FFFFFF",
@@ -425,9 +425,9 @@ export default function AgentComponent() {
       {/* FRAMER: Fixed header space */}
       <div style={{ height: "40px", alignSelf: "stretch", background: "transparent" }} />
       
-      {/* FRAMER: Static chat container - no jumping */}
+      {/* FRAMER: Static chat container - FIXED HEIGHT */}
       <div style={{ 
-        height: "450px", 
+        height: "400px", 
         alignSelf: "stretch",
         background: "transparent",
         overflow: "hidden",
@@ -774,21 +774,19 @@ export default function AgentComponent() {
           ))}
           </div>
         )}
-        {/* INPUT STACK BELOW - CENTERED */}
+        {/* INPUT SECTION - STATIC POSITION */}
         <div
           style={{
             display: "flex",
-            maxWidth: "754px",
-            justifyContent: "center",
+            flexDirection: "column",
             alignItems: "center",
-            gap: "17px",
-            padding: "0 12px",
-            marginTop: "20px",
             width: "100%",
+            marginTop: "20px",
+            padding: "0 20px",
           }}
         >
-          {/* Chat input form for the user to send messages */}
-          <form onSubmit={handleSubmit} style={{ border: "none", background: "none", padding: 0, margin: 0, width: "100%" }}>
+          {/* Chat input form */}
+          <form onSubmit={handleSubmit} style={{ border: "none", background: "none", padding: 0, margin: 0, width: "100%", maxWidth: "754px" }}>
             <div
               className="chat-input-container"
               style={{
@@ -799,7 +797,6 @@ export default function AgentComponent() {
                 alignItems: "flex-start",
                 gap: "8px",
                 alignSelf: "stretch",
-                maxWidth: "754px",
                 width: "100%",
                 boxSizing: "border-box",
                 borderRadius: "16px",
@@ -923,70 +920,70 @@ export default function AgentComponent() {
               </div>
             </div>
           </form>
-        </div>
-
-        {/* BETA MESSAGE - INSIDE MAIN CONTAINER */}
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: "9px",
-            marginTop: "12px",
-            width: "100%",
-          }}
-        >
-          {/* BETA badge */}
+          
+          {/* BETA MESSAGE - BELOW INPUT FORM */}
           <div
             style={{
               display: "flex",
-              width: "33px",
-              height: "14.143px",
-              padding: "3.367px",
               justifyContent: "center",
               alignItems: "center",
-              gap: "6.735px",
-              borderRadius: "14.143px",
-              background: "#D9D9D9",
+              gap: "9px",
+              marginTop: "12px",
+              width: "100%",
+              maxWidth: "754px",
             }}
           >
-            <span
+            {/* BETA badge */}
+            <div
               style={{
-                width: "27px",
-                height: "9px",
-                flexShrink: 0,
-                color: "#424242",
-                textAlign: "center",
-                fontFamily: 'Acumin Pro',
-                fontSize: "8.082px",
-                fontStyle: "normal",
-                fontWeight: 700,
-                lineHeight: "normal",
-                letterSpacing: 0,
+                display: "flex",
+                width: "33px",
+                height: "14.143px",
+                padding: "3.367px",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "6.735px",
+                borderRadius: "14.143px",
+                background: "#D9D9D9",
               }}
             >
-              BETA
-            </span>
-          </div>
-          {/* Text holder */}
-          <div
-            style={{
-              width: "186px",
-              height: "11px",
-              color: "#424242",
-              fontFamily: 'Acumin Pro',
-              fontSize: "11px",
-              fontStyle: "normal",
-              fontWeight: 400,
-              lineHeight: "normal",
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            Chai.AI may create unexpected results
+              <span
+                style={{
+                  width: "27px",
+                  height: "9px",
+                  flexShrink: 0,
+                  color: "#424242",
+                  textAlign: "center",
+                  fontFamily: 'Acumin Pro',
+                  fontSize: "8.082px",
+                  fontStyle: "normal",
+                  fontWeight: 700,
+                  lineHeight: "normal",
+                  letterSpacing: 0,
+                }}
+              >
+                BETA
+              </span>
+            </div>
+            {/* Text holder */}
+            <div
+              style={{
+                width: "186px",
+                height: "11px",
+                color: "#424242",
+                fontFamily: 'Acumin Pro',
+                fontSize: "11px",
+                fontStyle: "normal",
+                fontWeight: 400,
+                lineHeight: "normal",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              Chai.AI may create unexpected results
+            </div>
           </div>
         </div>
-      </div>
 
       {/* Define keyframes for the spin animation and responsive styles */}
       <style jsx>{`

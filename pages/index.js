@@ -880,7 +880,7 @@ export default function AgentComponent() {
                   flexWrap: "wrap",
                   width: "100%",
                   boxSizing: "border-box",
-                  padding: "0 5px 0 0",
+                  padding: "0 20px 0 0",
                 }}
               >
                 <input
@@ -915,7 +915,7 @@ export default function AgentComponent() {
                     border: "none",
                     cursor: isLoading ? "default" : "pointer",
                     padding: 0,
-                    margin: "0 0 0 -20px",
+                    margin: "0 0 0 0",
                     width: "20px",
                     height: "20px",
                     display: "flex",

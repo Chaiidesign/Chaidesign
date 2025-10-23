@@ -677,7 +677,7 @@ export default function AgentComponent() {
           maxWidth: "754px",
           flexDirection: "column",
           alignItems: "center",
-          gap: "6px",
+          gap: "5px",
           alignSelf: "stretch",
           flexShrink: 0,
           margin: "0 auto",

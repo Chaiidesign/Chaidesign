@@ -686,18 +686,21 @@ export default function AgentComponent() {
         {showPills && (
           <div
             style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
+              display: "grid",
               height: "84px",
+              padding: "0 41px",
+              rowGap: "62px",
+              columnGap: "62px",
+              alignSelf: "stretch",
+              gridTemplateRows: "repeat(1, minmax(0, 1fr))",
+              gridTemplateColumns: "repeat(6, minmax(0, 1fr))",
               width: "100%",
+              maxWidth: "100%",
+              boxSizing: "border-box",
               background: "#FFF",
               overflow: "visible",
               position: "relative",
               zIndex: 10,
-              gap: "20px",
-              padding: "0 20px",
-              boxSizing: "border-box",
             }}
           >
           {suggestions.map((s, idx) => (
@@ -714,14 +717,15 @@ export default function AgentComponent() {
               style={{
                 display: "flex",
                 width: "59.559px",
-                height: "59.559px",
+                height: "83.559px",
                 flexDirection: "column",
                 alignItems: "center",
-                justifyContent: "center",
-                gap: "2px",
-                boxSizing: "border-box",
-                cursor: "pointer",
+                gap: "7px",
                 flexShrink: 0,
+                gridRow: "1 / span 1",
+                gridColumn: `${idx + 1} / span 1`,
+                cursor: "pointer",
+                boxSizing: "border-box",
               }}
             >
               <div
@@ -1096,7 +1100,7 @@ export default function AgentComponent() {
             width: 18px !important;
             height: 18px !important;
           }
-        }x
+         }
         
         /* 3. MOBILE STATE - Below 768px */
         @media (max-width: 767px) {

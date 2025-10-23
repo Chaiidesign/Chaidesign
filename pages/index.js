@@ -667,17 +667,17 @@ export default function AgentComponent() {
       </div>
 
       {/* FRAMER: Static bottom section - no jumping */}
-      {/* MAIN CONTAINER FOR PILLS AND CHAT INPUT - 754px width */}
+      {/* MAIN CONTAINER FOR PILLS AND CHAT INPUT - 784px width */}
       <div
         style={{
           display: "flex",
-          width: "754px",
-          height: "205px",
+          width: "784px",
+          height: "784px",
           minWidth: "400px",
-          maxWidth: "754px",
+          maxWidth: "784px",
           flexDirection: "column",
           alignItems: "center",
-          gap: "3px",
+          gap: "1px",
           alignSelf: "stretch",
           flexShrink: 0,
           margin: "0 auto",
@@ -721,7 +721,7 @@ export default function AgentComponent() {
               style={{
                 display: "flex",
                 width: "59.559px",
-                height: "60px",
+                height: "75px",
                 flexDirection: "column",
                 alignItems: "center",
                 gap: "3px",

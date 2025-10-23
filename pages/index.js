@@ -691,7 +691,7 @@ export default function AgentComponent() {
             style={{
               display: "grid",
               height: "auto",
-              padding: "0 41px",
+              padding: "0 41px 0 41px",
               rowGap: "62px",
               columnGap: "62px",
               alignSelf: "stretch",
@@ -833,7 +833,7 @@ export default function AgentComponent() {
           style={{
             display: "flex",
             maxWidth: "754px",
-            padding: "16px 12px",
+            padding: "0 12px 16px 12px",
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "flex-start",

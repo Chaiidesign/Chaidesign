@@ -691,7 +691,7 @@ export default function AgentComponent() {
             style={{
               display: "grid",
               height: "auto",
-              padding: "0",
+               padding: "0",
               rowGap: "62px",
               columnGap: "62px",
               alignSelf: "stretch",

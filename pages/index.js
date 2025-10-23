@@ -440,10 +440,10 @@ export default function AgentComponent() {
           position: "relative",
         }}
       >
-        {/* CHAT CONVERSATION AREA - TOP SECTION */}
+        {/* CHAT CONVERSATION AREA - FIXED HEIGHT */}
         <div
           style={{
-            flex: "1",
+            height: "500px",
             width: "100%",
             maxWidth: "736px",
             overflowY: "auto",
@@ -753,9 +753,10 @@ export default function AgentComponent() {
           </div>
         </div>
 
-        {/* BOTTOM SECTION - Pills and Input */}
+        {/* BOTTOM SECTION - Pills and Input - FIXED HEIGHT */}
         <div
           style={{
+            height: "200px",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -908,12 +909,12 @@ export default function AgentComponent() {
         </div>
         )}
         
-        {/* CARDBOX LAYOUT - INPUT SECTION - AUTO-LAYOUT */}
+        {/* CARDBOX LAYOUT - INPUT SECTION - EQUAL PADDING */}
         <div
           style={{
             display: "flex",
             maxWidth: "744px",
-            padding: "20px 16px",
+            padding: "20px 20px",
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "stretch",

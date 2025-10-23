@@ -338,10 +338,8 @@ export default function AgentComponent() {
   const handlePromptClick = async (prompt) => {
     // Set the chat input to the prompt text.
     setMessage(prompt);
-    // Submit the prompt to the chat.
-    setTimeout(() => {
-      submitMessage(prompt);
-    }, 0); // Ensures the state has been updated before calling submitMessage
+    // Submit the prompt to the chat immediately
+    await submitMessage(prompt);
   };
 
   /**
@@ -443,7 +441,7 @@ export default function AgentComponent() {
             flexDirection: "column",
             gap: "5px",
             marginBottom: "5px",
-            maxHeight: chatConfig.maxChatHeight ? Math.max(500, parseInt(chatConfig.maxChatHeight)) : 500,
+            maxHeight: "350px",
             overflowY: "auto",
             border: "none",
             padding: "0 20px 5px 20px",
@@ -840,7 +838,7 @@ export default function AgentComponent() {
           }}
         />
         
-        {/* INPUT SECTION - PROPERLY CENTERED */}
+        {/* INPUT SECTION - PERFECTLY CENTERED */}
         <div
           style={{
             display: "flex",
@@ -848,7 +846,7 @@ export default function AgentComponent() {
             alignItems: "center",
             width: "100%",
             marginTop: "20px",
-            padding: "0 20px",
+            padding: "0",
             boxSizing: "border-box",
           }}
         >

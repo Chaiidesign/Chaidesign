@@ -690,7 +690,7 @@ export default function AgentComponent() {
           <div
             style={{
               display: "grid",
-              height: "84px",
+              height: "auto",
               padding: "0 41px",
               rowGap: "62px",
               columnGap: "62px",
@@ -704,6 +704,7 @@ export default function AgentComponent() {
               overflow: "visible",
               position: "relative",
               zIndex: 10,
+              margin: "0",
             }}
           >
           {suggestions.map((s, idx) => (
@@ -832,7 +833,7 @@ export default function AgentComponent() {
           style={{
             display: "flex",
             maxWidth: "754px",
-            padding: "8px 12px",
+            padding: "16px 12px",
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "flex-start",

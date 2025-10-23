@@ -296,8 +296,10 @@ export default function AgentComponent() {
       fontWeight: 400,
       lineHeight: "normal",
       alignSelf: "flex-end",
-      margin: 0,
-      maxWidth: "80%",
+      margin: "0 0 0 auto",
+      maxWidth: "70%",
+      wordBreak: "break-word",
+      overflowWrap: "break-word",
     },
     agent: {
       display: "inline-flex",
@@ -417,7 +419,7 @@ export default function AgentComponent() {
         boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
         borderRadius: "12px",
         padding: "20px",
-        overflow: "hidden",
+        overflow: "visible",
         position: "relative",
         // RESPONSIVE: Three states - Website, Tablet, Mobile
       }}
@@ -425,9 +427,9 @@ export default function AgentComponent() {
       {/* FRAMER: Fixed header space */}
       <div style={{ height: "40px", alignSelf: "stretch", background: "transparent" }} />
       
-      {/* FRAMER: Static chat container - FIXED HEIGHT */}
+      {/* FRAMER: Static chat container - REDUCED HEIGHT FOR BETA */}
       <div style={{ 
-        height: "400px", 
+        height: "350px", 
         alignSelf: "stretch",
         background: "transparent",
         overflow: "hidden",
@@ -444,10 +446,11 @@ export default function AgentComponent() {
             maxHeight: chatConfig.maxChatHeight ? Math.max(500, parseInt(chatConfig.maxChatHeight)) : 500,
             overflowY: "auto",
             border: "none",
-            padding: "0 0 5px 0",
+            padding: "0 20px 5px 20px",
             borderRadius: 0,
             background: "none",
             width: "100%",
+            boxSizing: "border-box",
           }}
         >
           {conversation.map((msg, index) => {
@@ -700,7 +703,7 @@ export default function AgentComponent() {
               maxWidth: "100%",
               boxSizing: "border-box",
               background: "#FFF",
-              overflow: "hidden",
+              overflow: "visible",
               position: "relative",
               zIndex: 10,
             }}
@@ -772,9 +775,72 @@ export default function AgentComponent() {
               </div>
             </div>
           ))}
-          </div>
+          
+          {/* THINKING STATE - Show when loading */}
+          {isLoading && (
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+                padding: "19px 13px",
+                borderRadius: "13px",
+                background: "none",
+                color: "#666",
+                fontFamily: 'Acumin Pro, Arial, sans-serif',
+                fontSize: "14px",
+                fontStyle: "normal",
+                fontWeight: 400,
+                lineHeight: "normal",
+                alignSelf: "flex-start",
+                margin: 0,
+                width: "100%",
+                maxWidth: "731px",
+                position: "relative",
+                boxSizing: "border-box",
+              }}
+            >
+              <div style={{ display: "flex", width: "731px", flexDirection: "column", alignItems: "flex-start" }}>
+                <div style={{
+                  color: "#666",
+                  fontFamily: 'Acumin Pro, Arial, sans-serif',
+                  fontSize: "14px",
+                  fontStyle: "normal",
+                  fontWeight: 400,
+                  lineHeight: "normal",
+                  marginLeft: "40px",
+                  paddingBottom: "5px",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "8px"
+                }}>
+                  <div style={{
+                    width: "16px",
+                    height: "16px",
+                    border: "2px solid #666",
+                    borderTop: "2px solid transparent",
+                    borderRadius: "50%",
+                    animation: "spin 1s linear infinite"
+                  }}></div>
+                  Thinking...
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
         )}
-        {/* INPUT SECTION - STATIC POSITION */}
+        
+        {/* WHITE BACKGROUND SEPARATOR - Between pills and input */}
+        <div
+          style={{
+            height: "20px",
+            width: "100%",
+            background: "#FFFFFF",
+            alignSelf: "stretch",
+          }}
+        />
+        
+        {/* INPUT SECTION - PROPERLY CENTERED */}
         <div
           style={{
             display: "flex",
@@ -783,6 +849,7 @@ export default function AgentComponent() {
             width: "100%",
             marginTop: "20px",
             padding: "0 20px",
+            boxSizing: "border-box",
           }}
         >
           {/* Chat input form */}
@@ -792,9 +859,9 @@ export default function AgentComponent() {
               style={{
                 display: "flex",
                 flexDirection: "column",
-                padding: "16px 12px",
+                padding: "16px 20px",
                 justifyContent: "center",
-                alignItems: "flex-start",
+                alignItems: "center",
                 gap: "8px",
                 alignSelf: "stretch",
                 width: "100%",
@@ -813,7 +880,7 @@ export default function AgentComponent() {
                   padding: "4px 8px",
                   flexDirection: "column",
                   justifyContent: "center",
-                  alignItems: "flex-start",
+                  alignItems: "center",
                   gap: "8px",
                   alignSelf: "stretch",
                   borderRadius: "8px",

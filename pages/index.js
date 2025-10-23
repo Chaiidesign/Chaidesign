@@ -851,7 +851,7 @@ export default function AgentComponent() {
           }}
         >
           {/* Chat input form */}
-          <form onSubmit={handleSubmit} style={{ border: "none", background: "none", padding: 0, margin: 0, width: "100%", maxWidth: "754px" }}>
+          <form onSubmit={handleSubmit} style={{ border: "none", background: "none", padding: 0, margin: 0, width: "100%", maxWidth: "745px" }}>
             <div
               className="chat-input-container"
               style={{
@@ -995,7 +995,7 @@ export default function AgentComponent() {
               gap: "9px",
               marginTop: "12px",
               width: "100%",
-              maxWidth: "754px",
+              maxWidth: "745px",
             }}
           >
             {/* BETA badge */}

@@ -691,7 +691,7 @@ export default function AgentComponent() {
             style={{
               display: "grid",
               height: "84px",
-              padding: "0 41px",
+              padding: "0 20px 0 20px",
               rowGap: "62px",
               columnGap: "62px",
               alignSelf: "stretch",
@@ -838,20 +838,20 @@ export default function AgentComponent() {
           }}
         />
         
-        {/* INPUT SECTION - PERFECTLY CENTERED */}
+        {/* INPUT SECTION - LEFT ALIGNED WITH 20PX PADDING */}
         <div
           style={{
             display: "flex",
             flexDirection: "column",
-            alignItems: "center",
+            alignItems: "flex-start",
             width: "100%",
             marginTop: "20px",
-            padding: "0 20px",
+            padding: "0 0 0 20px",
             boxSizing: "border-box",
           }}
         >
           {/* Chat input form */}
-          <form onSubmit={handleSubmit} style={{ border: "none", background: "none", padding: 0, margin: 0, width: "100%", maxWidth: "705px" }}>
+          <form onSubmit={handleSubmit} style={{ border: "none", background: "none", padding: 0, margin: 0, width: "100%", maxWidth: "745px" }}>
             <div
               className="chat-input-container"
               style={{
@@ -995,7 +995,7 @@ export default function AgentComponent() {
               gap: "9px",
               marginTop: "12px",
               width: "100%",
-              maxWidth: "705px",
+              maxWidth: "745px",
             }}
           >
             {/* BETA badge */}

@@ -1321,6 +1321,7 @@ export default function AgentComponent() {
           </div>
         </div>
       </div>
+      </div>
 
       {/* Define keyframes for the spin animation and responsive styles */}
       <style jsx>{`

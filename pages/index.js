@@ -832,7 +832,7 @@ export default function AgentComponent() {
           style={{
             display: "flex",
             maxWidth: "754px",
-            padding: "16px 12px",
+            padding: "8px 12px",
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "flex-start",

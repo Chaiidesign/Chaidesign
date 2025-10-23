@@ -836,7 +836,7 @@ export default function AgentComponent() {
           }}
         />
         
-        {/* CARDBOX LAYOUT - INPUT SECTION */}
+        {/* CARDBOX LAYOUT - INPUT SECTION - STATIC POSITION */}
         <div
           style={{
             display: "flex",
@@ -852,6 +852,10 @@ export default function AgentComponent() {
             background: "#FFF",
             width: "100%",
             boxSizing: "border-box",
+            position: "absolute",
+            bottom: "0",
+            left: "50%",
+            transform: "translateX(-50%)",
           }}
         >
           {/* Chat input form */}
@@ -933,15 +937,18 @@ export default function AgentComponent() {
           </form>
         </div>
         
-        {/* BETA MESSAGE - OUTSIDE INPUT SECTION WITH 5PX GAP */}
+        {/* BETA MESSAGE - OUTSIDE INPUT SECTION WITH 5PX GAP - STATIC POSITION */}
         <div
           style={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
             gap: "9px",
-            marginTop: "5px",
             width: "100%",
+            position: "absolute",
+            bottom: "-35px",
+            left: "50%",
+            transform: "translateX(-50%)",
           }}
         >
           {/* BETA badge */}

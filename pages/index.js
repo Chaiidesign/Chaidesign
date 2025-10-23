@@ -880,6 +880,7 @@ export default function AgentComponent() {
                   flexWrap: "wrap",
                   width: "100%",
                   boxSizing: "border-box",
+                  padding: "0 15px 0 0",
                 }}
               >
                 <input
@@ -900,6 +901,7 @@ export default function AgentComponent() {
                     outline: "none",
                     background: "transparent",
                     boxSizing: "border-box",
+                    padding: "0 8px",
                   }}
                 />
                 {/* Send button */}

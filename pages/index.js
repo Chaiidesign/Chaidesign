@@ -915,7 +915,7 @@ export default function AgentComponent() {
                     border: "none",
                     cursor: isLoading ? "default" : "pointer",
                     padding: 0,
-                    margin: 0,
+                    margin: "0 0 0 -20px",
                     width: "20px",
                     height: "20px",
                     display: "flex",

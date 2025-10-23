@@ -902,6 +902,7 @@ export default function AgentComponent() {
                     boxSizing: "border-box",
                   }}
                 />
+              </div>
                 {/* Send button */}
                 <button
                   type="submit"

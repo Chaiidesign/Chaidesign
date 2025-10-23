@@ -686,21 +686,18 @@ export default function AgentComponent() {
         {showPills && (
           <div
             style={{
-              display: "grid",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
               height: "84px",
-              padding: "0 20px 0 20px",
-              rowGap: "62px",
-              columnGap: "62px",
-              alignSelf: "stretch",
-              gridTemplateRows: "repeat(1, minmax(0, 1fr))",
-              gridTemplateColumns: "repeat(6, minmax(0, 1fr))",
               width: "100%",
-              maxWidth: "100%",
-              boxSizing: "border-box",
               background: "#FFF",
               overflow: "visible",
               position: "relative",
               zIndex: 10,
+              gap: "20px",
+              padding: "0 20px",
+              boxSizing: "border-box",
             }}
           >
           {suggestions.map((s, idx) => (
@@ -716,7 +713,7 @@ export default function AgentComponent() {
               onClick={() => setMessage(s.message)}
               style={{
                 display: "flex",
-                width: "100%",
+                width: "59.559px",
                 height: "59.559px",
                 flexDirection: "column",
                 alignItems: "center",
@@ -724,9 +721,7 @@ export default function AgentComponent() {
                 gap: "2px",
                 boxSizing: "border-box",
                 cursor: "pointer",
-                gridRow: "1 / span 1",
-                gridColumn: `${idx + 1} / span 1`,
-                alignSelf: "stretch",
+                flexShrink: 0,
               }}
             >
               <div
@@ -835,20 +830,20 @@ export default function AgentComponent() {
           }}
         />
         
-        {/* INPUT SECTION - LEFT ALIGNED WITH 20PX PADDING */}
+        {/* INPUT SECTION - CENTER ALIGNED */}
         <div
           style={{
             display: "flex",
             flexDirection: "column",
-            alignItems: "flex-start",
+            alignItems: "center",
             width: "100%",
             marginTop: "20px",
-            padding: "0 0 0 20px",
+            padding: "0 20px",
             boxSizing: "border-box",
           }}
         >
           {/* Chat input form */}
-          <form onSubmit={handleSubmit} style={{ border: "none", background: "none", padding: 0, margin: 0, width: "100%", maxWidth: "745px" }}>
+          <form onSubmit={handleSubmit} style={{ border: "none", background: "none", padding: 0, margin: 0, width: "100%", maxWidth: "754px" }}>
             <div
               className="chat-input-container"
               style={{
@@ -992,7 +987,7 @@ export default function AgentComponent() {
               gap: "9px",
               marginTop: "12px",
               width: "100%",
-              maxWidth: "745px",
+              maxWidth: "754px",
             }}
           >
             {/* BETA badge */}
@@ -1101,7 +1096,7 @@ export default function AgentComponent() {
             width: 18px !important;
             height: 18px !important;
           }
-        }
+        }x
         
         /* 3. MOBILE STATE - Below 768px */
         @media (max-width: 767px) {

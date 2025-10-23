@@ -667,22 +667,28 @@ export default function AgentComponent() {
       </div>
 
       {/* FRAMER: Static bottom section - no jumping */}
-      {/* MAIN CONTAINER FOR PILLS AND CHAT INPUT - 754px width */}
+      {/* CARD CONTAINER - Optimized UX Design */}
       <div
         style={{
           display: "flex",
-          width: "754px",
-          height: "205px",
-          minWidth: "400px",
-          maxWidth: "754px",
+          width: "784px",
+          height: "auto",
+          minHeight: "400px",
+          minWidth: "320px",
+          maxWidth: "784px",
           flexDirection: "column",
           alignItems: "center",
-          gap: "0px",
-          alignSelf: "stretch",
-          flexShrink: 0,
+          justifyContent: "flex-start",
+          gap: "24px",
           margin: "0 auto",
-          background: "transparent",
+          background: "#FFFFFF",
+          border: "1px solid rgba(0, 0, 0, 0.08)",
+          borderRadius: "16px",
+          boxShadow: "0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08)",
+          padding: "32px 24px",
+          boxSizing: "border-box",
           position: "relative",
+          transition: "all 0.3s ease",
         }}
       >
         {/* SUGGESTION PILLS GRID - HIDE AFTER FIRST INTERACTION */}
@@ -692,14 +698,14 @@ export default function AgentComponent() {
               display: "grid",
               height: "auto",
               maxHeight: "76px",
-               padding: "0",
-              rowGap: "62px",
-              columnGap: "62px",
+              padding: "16px 0",
+              rowGap: "16px",
+              columnGap: "16px",
               alignSelf: "stretch",
               gridTemplateRows: "repeat(1, minmax(0, 1fr))",
               gridTemplateColumns: "repeat(6, minmax(0, 1fr))",
               width: "100%",
-              maxWidth: "100%",
+              maxWidth: "744px",
               boxSizing: "border-box",
               background: "#FFF",
               overflow: "visible",
@@ -829,26 +835,24 @@ export default function AgentComponent() {
         </div>
         )}
         
-        {/* CARDBOX LAYOUT - INPUT SECTION - STATIC POSITION */}
+        {/* CARDBOX LAYOUT - INPUT SECTION - AUTO-LAYOUT */}
         <div
           style={{
             display: "flex",
-            maxWidth: "754px",
-            padding: "16px 12px",
+            maxWidth: "744px",
+            padding: "20px 16px",
             flexDirection: "column",
             justifyContent: "center",
-            alignItems: "flex-start",
-            gap: "8px",
+            alignItems: "stretch",
+            gap: "12px",
             alignSelf: "stretch",
-            borderRadius: "16px",
-            border: "0.5px solid rgba(0, 0, 0, 0.10)",
-            background: "#FFF",
+            borderRadius: "12px",
+            border: "1px solid rgba(0, 0, 0, 0.12)",
+            background: "#FAFAFA",
             width: "100%",
             boxSizing: "border-box",
-            position: "absolute",
-            bottom: "0",
-            left: "50%",
-            transform: "translateX(-50%)",
+            position: "relative",
+            transition: "border-color 0.2s ease, box-shadow 0.2s ease",
           }}
         >
           {/* Chat input form */}
@@ -930,18 +934,19 @@ export default function AgentComponent() {
           </form>
         </div>
         
-        {/* BETA MESSAGE - OUTSIDE INPUT SECTION WITH 5PX GAP - STATIC POSITION */}
+        {/* BETA MESSAGE - Optimized UX Design */}
         <div
           style={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            gap: "9px",
+            gap: "8px",
             width: "100%",
-            position: "absolute",
-            bottom: "-35px",
-            left: "50%",
-            transform: "translateX(-50%)",
+            maxWidth: "744px",
+            padding: "8px 12px",
+            borderRadius: "8px",
+            background: "rgba(0, 0, 0, 0.04)",
+            border: "1px solid rgba(0, 0, 0, 0.08)",
           }}
         >
           {/* BETA badge */}

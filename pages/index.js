@@ -829,7 +829,7 @@ export default function AgentComponent() {
         {/* WHITE BACKGROUND SEPARATOR - Between pills and input */}
         <div
           style={{
-            height: "20px",
+            height: "8px",
             width: "100%",
             background: "#FFFFFF",
             alignSelf: "stretch",

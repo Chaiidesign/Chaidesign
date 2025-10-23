@@ -677,7 +677,8 @@ export default function AgentComponent() {
           maxWidth: "754px",
           flexDirection: "column",
           alignItems: "center",
-          gap: "5px",
+          gap: "6px",
+          alignSelf: "stretch",
           flexShrink: 0,
           margin: "0 auto",
           background: "transparent",
@@ -825,16 +826,6 @@ export default function AgentComponent() {
           )}
         </div>
         )}
-        
-        {/* WHITE BACKGROUND SEPARATOR - Between pills and input */}
-        <div
-          style={{
-            height: "8px",
-            width: "100%",
-            background: "#FFFFFF",
-            alignSelf: "stretch",
-          }}
-        />
         
         {/* CARDBOX LAYOUT - INPUT SECTION - STATIC POSITION */}
         <div

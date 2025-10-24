@@ -930,13 +930,14 @@ export default function AgentComponent() {
           }}
         >
           {/* Chat input form */}
-          <form onSubmit={handleSubmit} style={{ border: "none", background: "none", padding: 0, margin: 0, width: "100%" }}>
+          <form onSubmit={handleSubmit} style={{ border: "none", background: "none", padding: 0, margin: 0, width: "100%", display: "flex", flexDirection: "column" }}>
             <div
               className="chat-input-container"
               style={{
                 display: "flex",
                 alignItems: "center",
                 width: "100%",
+                maxWidth: "100%",
                 height: "48px",
                 background: "#FFFFFF",
                 border: "1px solid rgba(0, 0, 0, 0.12)",
@@ -945,7 +946,7 @@ export default function AgentComponent() {
                 boxSizing: "border-box",
                 position: "relative",
                 margin: "0",
-                flex: "1",
+                overflow: "hidden",
               }}
             >
               <input
@@ -956,6 +957,7 @@ export default function AgentComponent() {
                 onChange={(e) => setMessage(e.target.value)}
                 style={{
                   flex: "1",
+                  minWidth: "0",
                   color: "#000",
                   fontFamily: 'Acumin Pro, Arial, sans-serif',
                   fontSize: "14px",
@@ -967,6 +969,8 @@ export default function AgentComponent() {
                   background: "transparent",
                   boxSizing: "border-box",
                   padding: "0 8px 0 0",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
                 }}
               />
               {/* Send button - Inside input field */}

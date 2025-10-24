@@ -944,6 +944,8 @@ export default function AgentComponent() {
                 padding: "0 16px",
                 boxSizing: "border-box",
                 position: "relative",
+                margin: "0",
+                flex: "1",
               }}
             >
               <input

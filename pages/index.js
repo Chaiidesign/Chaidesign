@@ -910,7 +910,7 @@ export default function AgentComponent() {
         )}
         
          {/* Chat input form - Clean without card container */}
-         <form onSubmit={handleSubmit} style={{ border: "none", background: "none", padding: 0, margin: 0, width: "100%", display: "flex", flexDirection: "column" }}>
+         <form onSubmit={handleSubmit} style={{ border: "none", background: "none", padding: "8px 0 0 0", margin: 0, width: "100%", display: "flex", flexDirection: "column" }}>
            <div
              className="chat-input-container"
              style={{

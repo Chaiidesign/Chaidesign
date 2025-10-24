@@ -1092,8 +1092,8 @@ export default function AgentComponent() {
         /* 1. WEBSITE STATE (Desktop) - 1200px and above */
         @media (min-width: 1200px) {
           .chat-input-container {
-            width: 754px !important;
-            max-width: 754px !important;
+            width: 100% !important;
+            max-width: 100% !important;
           }
           .main-container {
             width: 785px !important;
